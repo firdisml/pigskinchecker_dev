@@ -193,6 +193,7 @@ export default function PrimaryLayout(props: {
                                                         type="text"
                                                         name="price"
                                                         id="price"
+                                                        autoComplete="false"
                                                         onChange={(e) => set_search(e.target.value)}
                                                         value={search}
                                                         className="h-12 block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
