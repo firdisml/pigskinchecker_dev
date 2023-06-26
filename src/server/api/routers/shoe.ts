@@ -71,5 +71,17 @@ export const shoeRouter = createTRPCRouter({
                 }
             }
         })
-    })
+    }),
+
+    searchShoe: publicProcedure
+    .input(z.object({ name: z.string() }))
+    .query(async ({ ctx, input }) => {
+      return ctx.prisma.shoe.findMany({
+        where: {
+          uniqueName: {
+            contains: input.name,
+          },
+        },
+      });
+    }),
 });
