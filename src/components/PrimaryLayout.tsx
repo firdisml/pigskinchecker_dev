@@ -7,7 +7,7 @@ import { api } from "~/utils/api";
 import { IoIosMoon, IoIosSunny } from "react-icons/io";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
-import { HiOutlineSquaresPlus, HiUser } from "react-icons/hi2";
+import { HiOutlineSquaresPlus, HiUser, HiChevronRight } from "react-icons/hi2";
 import { HiSearch } from "react-icons/hi";
 import { Fredoka } from '@next/font/google'
 import { signIn, signOut, useSession } from "next-auth/react";
@@ -185,7 +185,7 @@ export default function PrimaryLayout(props: {
                                     leaveFrom="translate-x-0"
                                     leaveTo="translate-x-full"
                                 >
-                                    <div className="pointer-events-auto w-screen max-w-md">
+                                    <div className="pointer-events-auto w-screen max-w-xl">
                                         <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                             <div className="pt-6 pl-6 pb-6 pr-2">
                                                 <div className="flex items-center justify-between">
@@ -212,42 +212,35 @@ export default function PrimaryLayout(props: {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div className="border-b border-gray-200">
-                                                <div className="px-6">
-                                                    <nav className="-mb-px flex space-x-6" x-descriptions="Tab component">
-                                                        {tabs.map((tab) => (
-                                                            <a
-                                                                key={tab.name}
-                                                                href={tab.href}
-                                                                className={classNames(
-                                                                    tab.current
-                                                                        ? 'border-indigo-500 text-indigo-600'
-                                                                        : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                                                                    'whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm'
-                                                                )}
-                                                            >
-                                                                {tab.name}
-                                                            </a>
-                                                        ))}
-                                                    </nav>
-                                                </div>
+
+                                            {searchShoe?.data?.length > 0 && search.length > 0 ? (<><div className="group relative flex items-center py-5 border-t border-b px-5">
+                                                <a className="-m-1 block flex-1">
+                                                    <div className="flex">
+                                                        <div className="relative flex min-w-0 flex-1 items-center">
+                                                            <div className="ml-2 truncate">
+                                                                <p className="truncate text-sm font-medium text-gray-900">Search Result</p>
+                                                                <p className="truncate text-sm text-gray-500">{searchShoe?.data?.length} {searchShoe?.data?.length === 1 ? "Result" : "Results"}</p>
+                                                            </div>
+                                                        </div>
+                                                        <HiChevronRight className="h-6 w-6 my-auto" aria-hidden="true" />
+                                                    </div>
+                                                </a>
                                             </div>
-                                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 divide-y divide-gray-200 overflow-y-auto">
+                                            <div className="pl-6 font-semibold mt-5 text-gray-600">Top Results ({searchShoe?.data?.length < 10 ? searchShoe?.data?.length : 10})</div></>) : null}
+
+
+                                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 divide-y divide-gray-200 overflow-y-auto">
                                                 {searchShoe.isLoading || searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
                                                     <li key={index}>
-                                                        <div className="group relative flex items-center py-6 px-5">
-                                                            <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 block flex-1 p-1">
-                                                                <div className="absolute inset-0 group-hover:bg-gray-50" aria-hidden="true" />
+                                                        <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
+                                                            <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
+                                                                <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
                                                                 <div className="relative flex min-w-0 flex-1 items-center">
                                                                     <span className="relative inline-block flex-shrink-0">
-                                                                        <img className="h-10 w-10 rounded-full" src={"https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57"} alt="" />
-                                                                        <span
-                                                                            className='absolute top-0  bg-green-400 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white'
-                                                                            aria-hidden="true"
-                                                                        />
+                                                                        <img className="h-10 w-12 " src={"https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57"} alt="" />
                                                                     </span>
-                                                                    <div className="ml-4 truncate">
-                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe.name}</p>
+                                                                    <div className="ml-5 truncate">
+                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.brand?.name?.concat(" ", shoe.name)}</p>
                                                                         <p className="truncate text-sm text-gray-500">{shoe.color}</p>
                                                                     </div>
                                                                 </div>

@@ -82,6 +82,9 @@ export const shoeRouter = createTRPCRouter({
             contains: input.name,
           },
         },
+        include: {
+            brand:true
+        }
       });
     }),
 });
