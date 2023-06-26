@@ -212,7 +212,7 @@ export default function PrimaryLayout(props: {
                                                     </div>
                                                 </div>
                                             </div>
-
+                                            {/*@ts-ignore*/}
                                             {searchShoe?.data?.length > 0 && search.length > 0 ? (<><div className="group relative flex items-center py-5 border-t border-b px-5">
                                                 <a className="-m-1 block flex-1">
                                                     <div className="flex">
@@ -226,6 +226,7 @@ export default function PrimaryLayout(props: {
                                                     </div>
                                                 </a>
                                             </div>
+                                            {/*@ts-ignore*/}
                                             <div className="pl-6 font-semibold mt-5 text-gray-600">Top Results ({searchShoe?.data?.length < 10 ? searchShoe?.data?.length : 10})</div></>) : null}
 
 
