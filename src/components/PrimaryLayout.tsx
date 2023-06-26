@@ -19,7 +19,7 @@ const fredoka = Fredoka({
 import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
-import SearchList from "./SearchList";
+import { useDebounce } from "use-debounce";
 
 
 const tabs = [
@@ -43,6 +43,15 @@ export default function PrimaryLayout(props: {
     const [dash, setOpen] = useState(false)
     const [search, set_search] = useState<string>("")
 
+    function redirectlink(name: any) {
+        setOpen(false)
+        router.push(name)
+    }
+    const [search_debounced] = useDebounce<string>(search, 500);
+
+    const searchShoe = api.shoe.searchShoe.useQuery({
+        name: search_debounced.toLowerCase().replace(" ", "-"),
+    });
 
     useEffect(() => { setMounted(true) }, []);
 
@@ -69,11 +78,6 @@ export default function PrimaryLayout(props: {
 
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-
-                                        <button onClick={(e) => dash ? setOpen(false) : setOpen(true)} className="flex text-gray-500 dark:text-white bg-transparent font-medium hover:bg-opacity-75 px-3 py-2 rounded-md text-sm">
-                                        <HiSearch className="block h-5 w-5" aria-hidden="true" />
-                                            </button>
-
                                             <button onClick={() => { setTheme(theme === "dark" ? "light" : "dark") }} className="flex text-gray-500 dark:text-white bg-transparent font-medium hover:bg-opacity-75 px-3 py-2 rounded-md text-sm">
                                                 {theme === "light" ? (
                                                     <IoIosMoon className="block h-5 w-5" aria-hidden="true" />
@@ -83,6 +87,9 @@ export default function PrimaryLayout(props: {
                                                         aria-hidden="true"
                                                     />
                                                 )}
+                                            </button>
+                                            <button onClick={(e) => dash ? setOpen(false) : setOpen(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
+                                                <HiSearch className="h-5 w-5 mr-2" aria-hidden="true" /> Search
                                             </button>
 
                                             {sessionData ?
@@ -103,11 +110,15 @@ export default function PrimaryLayout(props: {
                                                     <HiOutlineSquaresPlus className="h-5 w-5 mr-2" /> Login
                                                 </button>}
 
-                                        
+
                                         </div>
                                     </div>
                                     <div className="-mr-2 flex md:hidden">
                                         {/* Mobile menu button */}
+                                        <Disclosure.Button onClick={(e) => dash ? setOpen(false) : setOpen(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
+                                            <HiSearch className="h-6 w-6 mr-5" aria-hidden="true" />
+                                        </Disclosure.Button>
+
                                         <Disclosure.Button
                                             className="bg-transparent inline-flex items-center justify-center p-2 text-gray-700 dark:text-white">
                                             {open ? (
@@ -120,11 +131,7 @@ export default function PrimaryLayout(props: {
                                             )}
                                         </Disclosure.Button>
 
-                                        <button
-                                            onClick={(e) => dash ? setOpen(false) : setOpen(true)}
-                                            className="bg-transparent inline-flex items-center justify-center p-2 text-gray-700 dark:text-white">
-                                            Search
-                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -223,7 +230,30 @@ export default function PrimaryLayout(props: {
                                                     </nav>
                                                 </div>
                                             </div>
-                                            {search.length != 0 ? <SearchList search={search} /> : null}
+                                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 divide-y divide-gray-200 overflow-y-auto">
+                                                {searchShoe.isLoading || searchShoe.isFetching ? <div>Loading..</div> : searchShoe?.data?.map((shoe, index) => (
+                                                    <li key={index}>
+                                                        <div className="group relative flex items-center py-6 px-5">
+                                                            <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 block flex-1 p-1">
+                                                                <div className="absolute inset-0 group-hover:bg-gray-50" aria-hidden="true" />
+                                                                <div className="relative flex min-w-0 flex-1 items-center">
+                                                                    <span className="relative inline-block flex-shrink-0">
+                                                                        <img className="h-10 w-10 rounded-full" src={"https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57"} alt="" />
+                                                                        <span
+                                                                            className='absolute top-0  bg-green-400 right-0 block h-2.5 w-2.5 rounded-full ring-2 ring-white'
+                                                                            aria-hidden="true"
+                                                                        />
+                                                                    </span>
+                                                                    <div className="ml-4 truncate">
+                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe.name}</p>
+                                                                        <p className="truncate text-sm text-gray-500">{shoe.color}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul> : null}
                                         </div>
                                     </div>
                                 </Transition.Child>
