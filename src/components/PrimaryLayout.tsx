@@ -12,6 +12,7 @@ import { HiSearch } from "react-icons/hi";
 import { Fredoka } from '@next/font/google'
 import { signIn, signOut, useSession } from "next-auth/react";
 import { capitalCase } from "change-case";
+
 const fredoka = Fredoka({
     subsets: ['latin'],
     weight: ['400']
@@ -231,7 +232,7 @@ export default function PrimaryLayout(props: {
                                                 </div>
                                             </div>
                                             {search_debounced?.length > 0 ? <ul role="list" className="flex-1 divide-y divide-gray-200 overflow-y-auto">
-                                                {searchShoe.isLoading || searchShoe.isFetching ? <div>Loading..</div> : searchShoe?.data?.map((shoe, index) => (
+                                                {searchShoe.isLoading || searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
                                                     <li key={index}>
                                                         <div className="group relative flex items-center py-6 px-5">
                                                             <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 block flex-1 p-1">
