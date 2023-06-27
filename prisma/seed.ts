@@ -6,10 +6,10 @@ async function main() {
     const seed = await prisma.shoe.create({
         data: {
             name: "Samba OG",
-            uniqueName: "adidas-samba-og-clay-strata",
-            color: "Clay Strata",
+            uniqueName: "adidas-samba-og-white-black-gum",
+            color: "White Black Gum",
             brandId: "cljbl91170000v4bwydxxs73t",
-            sku: "ID2047"
+            sku: "B75806"
         }
     })
 

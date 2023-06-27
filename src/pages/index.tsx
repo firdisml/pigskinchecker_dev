@@ -13,7 +13,7 @@ export default function Home() {
            {getAllShoe.isLoading || getAllShoe.isFetching ? 
            <div>Loading</div> : 
            <div>
-            {getAllShoe?.data?.map((shoe, index)=> (<Link key={index} href={shoe.uniqueName}>{shoe?.brand?.name?.concat(" ",shoe.name," ",shoe.color)}</Link>))}
+            {getAllShoe?.data?.map((shoe, index)=> (<div className="flex"><Link key={index} href={shoe.uniqueName}>{shoe?.brand?.name?.concat(" ",shoe.name," ",shoe.color)}</Link></div>))}
             </div>}
           </div>
     

@@ -34,39 +34,56 @@ const index = () => {
         })
     }
     return (
-        <div>
-            {getUniqueShoe.isFetching || getUniqueShoe.isLoading ? <div>Loading</div> :
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 mt-5">
+            <div className="grid grid-cols-1 gap-4 items-start lg:grid-cols-5 lg:gap-8">
 
-                <div className="flex flex-col">
-                    <div className="flex gap-x-5">
-                        <h1>True : {getTrueRatingCount.isLoading || getTrueRatingCount.isFetching ? <div>Loading..</div> : getTrueRatingCount?.data}</h1>
-                        <h1>false : {getFalseRatingCount.isLoading || getFalseRatingCount.isFetching ? <div>Loading..</div> : getFalseRatingCount?.data}</h1>
-                    </div>
-                    <img style={{ height: "500px", width: "700px" }} src="https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57" alt="" />
-                    <h1>{getUniqueShoe?.data?.brand?.name}</h1>
-                    <h1>{getUniqueShoe?.data?.name}</h1>
-                    <h1>{getUniqueShoe?.data?.color}</h1>
-                    <h1>{getUniqueShoe?.data?.sku}</h1>
-                </div>}
+                <div className="grid grid-cols-1 gap-4 lg:col-span-3">
+                    <section aria-labelledby="section-1-title">
+                        <div className="bg-white overflow-hidden">
+                            <div className="p-6">
+                                <img style={{ height: "400px", width: "600px" }} className="pl-10" src="https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57" alt="" />
+                            </div>
+                        </div>
+                    </section>
+                </div>
 
-            {sessionData ? getUniqueRating.isFetching || getUniqueRating.isLoading ? <div>Loading...
-            </div> : getUniqueRating?.data ? <div className="flex flex-col gap-x-5">
-                <h1>You Voted {getUniqueRating?.data?.status.toString().toUpperCase()}</h1>
-                <button disabled className="bg-blue-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
-                    Yes
-                </button>
-                <button disabled >No</button>
-            </div> : <div className="flex gap-x-5">
-                <button disabled={disable} onClick={(e: React.FormEvent) => { handle_submit(e, true) }} className="bg-blue-500 text-white font-bold py-2 px-4 rounded">
-                    Yes
-                </button>
-                <button disabled={disable} onClick={(e: React.FormEvent) => { handle_submit(e, false) }}>No</button>
+                <div className="grid grid-cols-1 gap-4 lg:col-span-2">
+                    <section aria-labelledby="section-2-title">
+                        <h2 className="sr-only" id="section-2-title">
+                            Section title
+                        </h2>
+                        <div className="bg-white overflow-hidden border">
+                            <div className="flex flex-col p-6">
+
+                                <h1 className="text-center font-semibold text-xl">{getUniqueShoe?.data?.brand?.name} {getUniqueShoe?.data?.name}</h1>
+                                <h1 className="text-center">{getUniqueShoe?.data?.color}</h1>
+
+                                
+                                {sessionData ? getUniqueRating.isFetching || getUniqueRating.isLoading ? <div>Loading...
+                                </div> : getUniqueRating?.data ? <div className="flex flex-col gap-x-5 mt-5">
+                                    <button disabled className="bg-blue-500 text-white font-bold py-2 px-4 rounded disabled:bg-gray-400">
+                                        Yes
+                                    </button>
+                                    <button disabled >No</button>
+                                </div> : <div className="flex gap-x-5">
+                                    <button disabled={disable} onClick={(e: React.FormEvent) => { handle_submit(e, true) }} className="bg-blue-500 text-white font-bold py-2 px-4 rounded mt-5">
+                                        Yes
+                                    </button>
+                                    <button disabled={disable} onClick={(e: React.FormEvent) => { handle_submit(e, false) }}>No</button>
+                                </div>
+                                    : <div>Please Login To Vote</div>}
+
+                                    <div className="w-full border-t border-gray-300 mt-5"></div>
+                                    <h1 className="text-center mt-5">You Voted {getUniqueRating?.data?.status.toString().toUpperCase()}</h1>
+                                    
+                            </div>
+                            
+
+                        </div>
+                        
+                    </section>
+                </div>
             </div>
-                : <div>Please Login To Vote</div>}
-
-
-                
-
         </div>
     );
 }

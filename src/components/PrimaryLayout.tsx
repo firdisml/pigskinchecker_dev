@@ -227,7 +227,19 @@ export default function PrimaryLayout(props: {
                                                 </a>
                                             </div>
                                             {/*@ts-ignore*/}
-                                            <div className="pl-6 font-semibold mt-5 text-gray-600">Top Results ({searchShoe?.data?.length < 10 ? searchShoe?.data?.length : 10})</div></>) : null}
+                                            <div className="pl-6 font-semibold mt-5 text-gray-600">Top Results ({searchShoe?.data?.length < 10 ? searchShoe?.data?.length : 10})</div></>) : searchShoe?.data?.length === 0 && search.length > 0 ? <div className="group relative flex items-center py-5 border-t border-b px-5">
+                                                <a className="-m-1 block flex-1">
+                                                    <div className="flex">
+                                                        <div className="relative flex min-w-0 flex-1 items-center">
+                                                            <div className="ml-2 truncate">
+                                                                <p className="truncate text-sm font-medium text-gray-900">Search Result</p>
+                                                                <p className="truncate text-sm text-gray-500">0 Result</p>
+                                                            </div>
+                                                        </div>
+                                                        <HiChevronRight className="h-6 w-6 my-auto" aria-hidden="true" />
+                                                    </div>
+                                                </a>
+                                            </div> : null}
 
 
                                             {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 divide-y divide-gray-200 overflow-y-auto">
@@ -257,9 +269,8 @@ export default function PrimaryLayout(props: {
                         </div>
                     </Dialog>
                 </Transition.Root>
-
                 <main>
-                    <div className="max-w-7xl mx-auto pt-4 sm:px-6 lg:px-8">
+                    <div className="max-w-7xl mx-auto pt-4">
                         {props.children}
                     </div>
                 </main>
