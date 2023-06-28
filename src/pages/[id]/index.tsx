@@ -241,7 +241,6 @@ export default function Example() {
                                             { x: 2, y: 40 },
                                         ]}
                                     />
-
                                     <text
                                         x={152} // Set the x-coordinate for the center of the text
                                         y={170} // Set the y-coordinate for the center of the text
@@ -250,7 +249,7 @@ export default function Example() {
                                         style={{
                                             fill: "black", // Set the text color
                                             fontSize: "25px", // Set the font size
-                                            fontWeight: 600 , // Set the font weight
+                                            fontWeight: 500 , // Set the font weight
                                         }}
                                     >
                                         95%
