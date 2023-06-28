@@ -200,22 +200,33 @@ export default function Example() {
                         <p className="text-gray-500 mt-6 text-justify pb-7 border-b">{product.description}</p>
 
                         <div className='mt-7'>
+                            
+                            <div className='flex flex-col'>
+                                <h1 className='flex justify-center text-2xl font-extrabold tracking-tight mb-7 '>Pigskin?</h1>
                             <div className='flex gap-x-5 justify-center'>
                                 <div className="flex items-center">
-                                    <svg className="h-4 w-4 inline-block">
+                                    <svg className="h-4 w-4 -ml-6 mb-6 inline-block">
                                         <circle cx="10" cy="10" r="5" fill="#4f46e5" />
                                     </svg>
-                                    <span className="ml-4 my-auto">True</span>
+                                    <div className='flex flex-col'>
+                                        <span className="ml-4 my-auto">True</span>
+                                        <span className="ml-4 my-auto font-semibold">98</span>
+                                    </div>
+                                  
                                 </div>
                                 <div className="flex items-center">
-                                    <svg className="h-4 w-4 inline-block">
+                                    <svg className="h-4 w-4 mb-6 inline-block">
                                         <circle cx="10" cy="10" r="5" fill="#c7d2fe" />
                                     </svg>
-                                    <span className="ml-4 my-auto">False</span>
+                                    <div className='flex flex-col'>
+                                        <span className="ml-4 my-auto">False</span>
+                                        <span className="ml-4 my-auto font-semibold">10</span>
+                                    </div>
                                 </div>
                             </div>
+                            </div>
 
-                            <div className='flex justify-center -mt-1'>
+                            <div className='flex justify-center -mt-2'>
                                 <svg width={300} height={300}>
                                     <VictoryPie
                                         standalone={false}
@@ -239,7 +250,7 @@ export default function Example() {
                                         style={{
                                             fill: "black", // Set the text color
                                             fontSize: "25px", // Set the font size
-                                            fontWeight: "bold", // Set the font weight
+                                            fontWeight: 600 , // Set the font weight
                                         }}
                                     >
                                         95%
