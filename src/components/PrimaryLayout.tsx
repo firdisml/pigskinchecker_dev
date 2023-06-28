@@ -41,11 +41,11 @@ export default function PrimaryLayout(props: {
     const { theme, setTheme } = useTheme()
     const router = useRouter()
     const [mounted, setMounted] = useState(false);
-    const [dash, setOpen] = useState(false)
+    const [dash, setDash] = useState(false)
     const [search, set_search] = useState<string>("")
 
     function redirectlink(name: any) {
-        setOpen(false)
+        setDash(false)
         router.push(name)
     }
     const [search_debounced] = useDebounce<string>(search, 500);
@@ -79,7 +79,7 @@ export default function PrimaryLayout(props: {
 
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-                                            <button onClick={(e) => dash ? setOpen(false) : setOpen(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
+                                            <button onClick={(e) => dash ? setDash(false) : setDash(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
                                                 <HiSearch className="h-5 w-5 mr-2" aria-hidden="true" /> Search
                                             </button>
 
@@ -106,9 +106,9 @@ export default function PrimaryLayout(props: {
                                     </div>
                                     <div className="-mr-2 flex md:hidden">
                                         {/* Mobile menu button */}
-                                        <Disclosure.Button onClick={(e) => dash ? setOpen(false) : setOpen(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
+                                        <button onClick={(e) => dash ? setDash(false) : setDash(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
                                             <HiSearch className="h-6 w-6 mr-5" aria-hidden="true" />
-                                        </Disclosure.Button>
+                                        </button>
 
                                         <Disclosure.Button
                                             className="bg-transparent inline-flex items-center justify-center p-2 text-gray-700 dark:text-white">
@@ -153,7 +153,7 @@ export default function PrimaryLayout(props: {
                 </Disclosure>
 
                 <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setOpen}>
+                    <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setDash}>
                         <div className="absolute inset-0 overflow-hidden">
                             <Dialog.Overlay className="absolute inset-0 bg-black opacity-60" />
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
@@ -176,7 +176,7 @@ export default function PrimaryLayout(props: {
                                                         <button
                                                             type="button"
                                                             className="rounded-md bg-white text-gray-400 hover:text-gray-500"
-                                                            onClick={() => setOpen(false)}
+                                                            onClick={() => setDash(false)}
                                                         >
                                                             <span className="sr-only">Close panel</span>
                                                             <XIcon className="h-6 w-6" aria-hidden="true" />
