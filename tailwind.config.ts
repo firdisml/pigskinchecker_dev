@@ -8,7 +8,7 @@ export default {
       colors: {
         'white': '#ffffff',
         'gray': {
-          50:  '#f9fafb',
+          50: '#f9fafb',
           100: '#f3f4f6',
           200: '#e5e7eb',
           300: '#d1d5db',
@@ -22,5 +22,8 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('@tailwindcss/aspect-ratio')
+  ],
 } satisfies Config;

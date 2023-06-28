@@ -79,16 +79,6 @@ export default function PrimaryLayout(props: {
 
                                     <div className="hidden md:block">
                                         <div className="ml-10 flex items-baseline space-x-4">
-                                            <button onClick={() => { setTheme(theme === "dark" ? "light" : "dark") }} className="flex text-gray-500 dark:text-white bg-transparent font-medium hover:bg-opacity-75 px-3 py-2 rounded-md text-sm">
-                                                {theme === "light" ? (
-                                                    <IoIosMoon className="block h-5 w-5" aria-hidden="true" />
-                                                ) : (
-                                                    <IoIosSunny
-                                                        className="block h-5 w-5"
-                                                        aria-hidden="true"
-                                                    />
-                                                )}
-                                            </button>
                                             <button onClick={(e) => dash ? setOpen(false) : setOpen(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
                                                 <HiSearch className="h-5 w-5 mr-2" aria-hidden="true" /> Search
                                             </button>
@@ -155,15 +145,6 @@ export default function PrimaryLayout(props: {
                                         <HiOutlineSquaresPlus className="h-5 w-5 mr-2" /> Submit Promotion
                                     </Disclosure.Button>)}
 
-                                    <Disclosure.Button
-                                        onClick={() => { setTheme(theme === 'light' ? 'dark' : 'light') }}
-                                        as="a"
-                                        className="flex dark:text-white text-gray-700 bg-transparent px-3 py-3 rounded-md text-sm font-semibold"
-                                        aria-current="page"
-                                    >
-
-                                        {theme === "light" ? (<><IoIosMoon className="block h-5 w-5 mr-2" aria-hidden="true" />Toggle Dark Mode</>) : (<><IoIosSunny className="block h-5 w-5 mr-2" aria-hidden="true" />Toggle Light Mode</>)}
-                                    </Disclosure.Button>
 
                                 </div>
                             </Disclosure.Panel>
@@ -176,15 +157,6 @@ export default function PrimaryLayout(props: {
                         <div className="absolute inset-0 overflow-hidden">
                             <Dialog.Overlay className="absolute inset-0 bg-black opacity-60" />
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="transform transition ease-in-out duration-500 sm:duration-300"
-                                    enterFrom="translate-x-full"
-                                    enterTo="translate-x-0"
-                                    leave="transform transition ease-in-out duration-500 sm:duration-300"
-                                    leaveFrom="translate-x-0"
-                                    leaveTo="translate-x-full"
-                                >
                                     <div className="pointer-events-auto w-screen max-w-xl">
                                         <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                             <div className="pt-6 pl-6 pb-6 pr-2">
@@ -264,13 +236,12 @@ export default function PrimaryLayout(props: {
                                             </ul> : null}
                                         </div>
                                     </div>
-                                </Transition.Child>
                             </div>
                         </div>
                     </Dialog>
                 </Transition.Root>
                 <main>
-                    <div className="max-w-7xl mx-auto pt-4">
+                    <div className="max-w-7xl mx-auto">
                         {props.children}
                     </div>
                 </main>
