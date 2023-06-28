@@ -39,7 +39,7 @@ const product = {
 }
 const reviews = { average: 4, totalCount: 1624 }
 
-function classNames(...classes) {
+function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
@@ -47,21 +47,21 @@ export default function Example() {
   const [selectedSize, setSelectedSize] = useState(product.sizes[0])
 
   return (
-<div className="bg-white  flex justidy-center items-center">
+<div className="bg-white flex justify-center items-center">
   <div className="max-w-2xl mx-auto py-auto px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
         {/* Product details */}
-        <div className="lg:max-w-lg lg:self-end">
+        <div className="lg:max-w-lg mt-16 lg:self-end">
 
           <div className="mt-4">
-          <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Adidas Samba OG</h1>
-          <p className="text-lg text-gray-500 mt-1">
+          <h1 className="text-2xl font-extrabold tracking-tight text-center text-gray-900 sm:text-3xl">Adidas Samba OG</h1>
+          <p className="text-lg text-center text-gray-500 mt-1">
                                     Clay Strata
         </p>
           </div>
         </div>
 
         {/* Product image */}
-        <div className="mt-10 lg:mt-0 lg:col-start-2 lg:row-span-2 lg:self-center">
+        <div className="mt-5 lg:mt-5 lg:col-start-2 lg:row-span-2 lg:self-center">
           <div className="aspect-w-5 aspect-h-3 overflow-hidden">
             <img src={product.imageSrc} alt={product.imageAlt} className="w-full h-full object-center object-cover" />
           </div>
