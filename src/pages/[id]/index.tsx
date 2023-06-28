@@ -233,7 +233,7 @@ export default function Example() {
             </div>
           </div>
 
-          <div className="w-full max-w-2xl mx-auto mt-16 lg:max-w-none lg:mt-0 lg:col-span-4">
+          <div className="w-full max-w-2xl mx-auto mt-10 lg:max-w-none lg:mt-0 lg:col-span-4">
             <Tab.Group as="div">
               <div className="border-b border-gray-200">
                 <Tab.List className="-mb-px flex space-x-8">
