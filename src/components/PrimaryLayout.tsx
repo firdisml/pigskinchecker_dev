@@ -151,8 +151,7 @@ export default function PrimaryLayout(props: {
                     )}
                 </Disclosure>
 
-                <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setDash}>
+                    <Dialog open={dash} as={Fragment} onClose={setDash}>
                         <div className="absolute inset-0 overflow-hidden">
                             <Dialog.Overlay className="absolute inset-0 bg-black opacity-60" />
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
@@ -238,7 +237,6 @@ export default function PrimaryLayout(props: {
                             </div>
                         </div>
                     </Dialog>
-                </Transition.Root>
                 <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
