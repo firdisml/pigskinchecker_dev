@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -9,7 +9,7 @@ dependencies:
     specifier: ^1.7.15
     version: 1.7.15(react-dom@18.2.0)(react@18.2.0)
   '@heroicons/react':
-    specifier: v1
+    specifier: ^1.0.0
     version: 1.0.0(react@18.2.0)
   '@next-auth/prisma-adapter':
     specifier: ^1.0.5
