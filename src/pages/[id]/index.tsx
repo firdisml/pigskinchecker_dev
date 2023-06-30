@@ -1,416 +1,296 @@
+import { useState } from 'react'
+import { Disclosure, RadioGroup, Tab } from '@headlessui/react'
+import { HiOutlineSquaresPlus, HiUser, HiChevronRight } from "react-icons/hi2";
 import { Fragment } from 'react'
-import { StarIcon } from '@heroicons/react/solid'
-import { Tab } from '@headlessui/react'
-import { signIn, signOut, useSession } from "next-auth/react";
-import Head from "next/head";
-import Link from "next/link";
-import { api } from "~/utils/api";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { Disclosure, RadioGroup } from '@headlessui/react'
-import { HeartIcon, MinusSmIcon, PlusSmIcon } from '@heroicons/react/outline'
-import { VictoryPie } from "victory";
 
-const products = {
-    name: 'Zip Tote Basket',
-    price: '$140',
-    rating: 4,
-    images: [
-        {
-            id: 1,
-            name: 'Angled view',
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-03-product-01.jpg',
-            alt: 'Angled front view with bag zipped and handles upright.',
-        },
-        // More images...
-    ],
-    colors: [
-        { name: 'Washed Black', bgColor: 'bg-gray-700', selectedColor: 'ring-gray-700' },
-        { name: 'White', bgColor: 'bg-white', selectedColor: 'ring-gray-400' },
-        { name: 'Washed Gray', bgColor: 'bg-gray-500', selectedColor: 'ring-gray-500' },
-    ],
-    description: `
-      <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
-    `,
-    details: [
-        {
-            name: 'Features',
-            items: [
-                'Multiple strap configurations',
-                'Spacious interior with top zip',
-                'Leather handle and tabs',
-                'Interior dividers',
-                'Stainless strap loops',
-                'Double stitched construction',
-                'Water-resistant',
-            ],
-        },
-        // More sections...
-    ],
-}
-
-const product = {
-    name: 'Application UI Icon Pack',
-    version: { name: '1.0', date: 'June 5, 2021', datetime: '2021-06-05' },
-    price: '$220',
-    description:
-        "An icon for decades, adidas Samba shoes originated on the indoor field — but they're made for your everyday look. This edition takes design inspiration from Los Angeles football culture, shaping a clean look that stands out while keeping things low-key. A premium suede upper and classic gumsole are hallmarks of heritage style. Pair this casual confidence with everything from tapered pants to loose-fit denim.",
-    highlights: [
-        'Soft & Durable Upper',
-        'Compatible with Figma, Sketch, and Adobe XD',
-        'Drawn on 24 x 24 pixel grid',
-    ],
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-05-product-01.jpg',
-    imageAlt: 'Sample of 30 icons with friendly and fun details in outline, filled, and brand color styles.',
-}
-const reviews = {
-    average: 4,
-    featured: [
-        {
-            id: 1,
-            rating: 5,
-            content: `
-        <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-      `,
-            date: 'July 16, 2021',
-            datetime: '2021-07-16',
-            author: 'Emily Selman',
-            avatarSrc:
-                'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-        },
-        {
-            id: 2,
-            rating: 5,
-            content: `
-        <p>Blown away by how polished this icon pack is. Everything looks so consistent and each SVG is optimized out of the box so I can use it directly with confidence. It would take me several hours to create a single icon this good, so it's a steal at this price.</p>
-      `,
-            date: 'July 12, 2021',
-            datetime: '2021-07-12',
-            author: 'Hector Gibbons',
-            avatarSrc:
-                'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-        },
-        {
-            id: 3,
-            rating: 5,
-            content: `
-          <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-        `,
-            date: 'July 16, 2021',
-            datetime: '2021-07-16',
-            author: 'Emily Selman',
-            avatarSrc:
-                'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-        },
-        {
-            id: 4,
-            rating: 5,
-            content: `
-          <p>This icon pack is just what I need for my latest project. There's an icon for just about anything I could ever need. Love the playful look!</p>
-        `,
-            date: 'July 16, 2021',
-            datetime: '2021-07-16',
-            author: 'Emily Selman',
-            avatarSrc:
-                'https://images.unsplash.com/photo-1502685104226-ee32379fefbe?ixlib=rb-=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=8&w=256&h=256&q=80',
-        },
-        // More reviews...
-    ],
-}
-const faqs = [
-    {
-        question: 'What format are these icons?',
-        answer:
-            'The icons are in SVG (Scalable Vector Graphic) format. They can be imported into your design tool of choice and used directly in code.',
-    },
-    {
-        question: 'Can I use the icons at different sizes?',
-        answer:
-            "Yes. The icons are drawn on a 24 x 24 pixel grid, but the icons can be scaled to different sizes as needed. We don't recommend going smaller than 20 x 20 or larger than 64 x 64 to retain legibility and visual balance.",
-    },
-    // More FAQs...
-]
-const license = {
-    href: '#',
-    summary:
-        'For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.',
+const reviews = [
+  {
+    id: 1,
+    title: "Can't say enough good things",
+    rating: 5,
     content: `
-    <h4>Overview</h4>
-    
-    <p>For personal and professional use. You cannot resell or redistribute these icons in their original or modified state.</p>
-    
-    <ul role="list">
-    <li>You\'re allowed to use the icons in unlimited projects.</li>
-    <li>Attribution is not required to use the icons.</li>
-    </ul>
-    
-    <h4>What you can do with it</h4>
-    
-    <ul role="list">
-    <li>Use them freely in your personal and professional work.</li>
-    <li>Make them your own. Change the colors to suit your project or brand.</li>
-    </ul>
-    
-    <h4>What you can\'t do with it</h4>
-    
-    <ul role="list">
-    <li>Don\'t be greedy. Selling or distributing these icons in their original or modified state is prohibited.</li>
-    <li>Don\'t be evil. These icons cannot be used on websites or applications that promote illegal or immoral beliefs or activities.</li>
-    </ul>
+      <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
+      <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
+    `,
+    author: 'Risako M',
+    date: '16 May 2021',
+    datetime: '2021-01-06',
+  },
+  // More reviews...
+]
+const product = {
+  name: 'Zip Tote Basket',
+  price: '$140',
+  rating: 4,
+  images: [
+    {
+      id: 1,
+      name: 'Angled view',
+      src: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/ed70b56fe9b24738b626af060183eb8d_9366/Samba_OG_Sporty_and_Rich_Shoes_White_HQ6075_01_standard.jpg',
+      alt: 'Angled front view with bag zipped and handles upright.',
+    },
+    {
+      id: 2,
+      name: 'Angled view',
+      src: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/32408964108c4428a05daf060188882f_9366/Samba_OG_Sporty_and_Rich_Shoes_White_HQ6075_41_detail.jpg',
+      alt: 'Angled front view with bag zipped and handles upright.',
+    },
+    {
+      id: 3,
+      name: 'Angled view',
+      src: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/10b265376f2d47a6945eaf060188919e_9366/Samba_OG_Sporty_and_Rich_Shoes_White_HQ6075_42_detail.jpg',
+      alt: 'Angled front view with bag zipped and handles upright.',
+    },
+    {
+      id: 4,
+      name: 'Angled view',
+      src: 'https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/873ebee1e05c4852b677af46007b7ff2_9366/Samba_OG_Sporty_and_Rich_Shoes_White_HQ6075_HM1.jpg',
+      alt: 'Angled front view with bag zipped and handles upright.',
+    },
+    // More images...
+  ],
+  colors: [
+    { name: 'Washed Black', bgColor: 'bg-gray-700', selectedColor: 'ring-gray-700' },
+    { name: 'White', bgColor: 'bg-white', selectedColor: 'ring-gray-400' },
+    { name: 'Washed Gray', bgColor: 'bg-gray-500', selectedColor: 'ring-gray-500' },
+  ],
+  description: `
+    <p>The Zip Tote Basket is the perfect midpoint between shopping tote and comfy backpack. With convertible straps, you can hand carry, should sling, or backpack this convenient and spacious bag. The zip top and durable canvas construction keeps your goods protected for all-day use.</p>
   `,
+  details: [
+    {
+      name: 'Features',
+      items: [
+        'Multiple strap configurations',
+        'Spacious interior with top zip',
+        'Leather handle and tabs',
+        'Interior dividers',
+        'Stainless strap loops',
+        'Double stitched construction',
+        'Water-resistant',
+      ],
+    },
+    {
+      name: 'Features',
+      items: [
+        'Multiple strap configurations',
+        'Spacious interior with top zip',
+        'Leather handle and tabs',
+        'Interior dividers',
+        'Stainless strap loops',
+        'Double stitched construction',
+        'Water-resistant',
+      ],
+    },
+    {
+      name: 'Features',
+      items: [
+        'Multiple strap configurations',
+        'Spacious interior with top zip',
+        'Leather handle and tabs',
+        'Interior dividers',
+        'Stainless strap loops',
+        'Double stitched construction',
+        'Water-resistant',
+      ],
+    },
+    // More sections...
+  ],
 }
 
-function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
+const pages = [
+  { name: 'Adidas', href: '#', current: false },
+  { name: 'Samba', href: '#', current: true },
+]
+
+function classNames(...classes:any) {
+  return classes.filter(Boolean).join(' ')
 }
 
 export default function Example() {
-    const router = useRouter()
-    const getUniqueShoe = api.shoe.getUniqueShoe.useQuery({ name: String(router.query.id) });
+  const [selectedColor, setSelectedColor] = useState(product.colors[0])
 
-    return (
-        <div className="bg-white">
-            <div className="mx-auto py-12 px-4 sm:py-12 sm:px-6 lg:max-w-7xl lg:px-8">
-                {/* Product */}
-                <div className="lg:grid lg:grid-rows-1 lg:grid-cols-7 lg:gap-x-8 lg:gap-y-10 xl:gap-x-16">
-                    {/* Product image */}
-                    <div className="lg:row-end-1 lg:col-span-4">
-                        <div className="aspect-w-5 aspect-h-3 rounded-lg bg-gray-100 overflow-hidden">
-                            <img src="https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57" alt={product.imageAlt} className="object-center object-cover" />
-                        </div>
-                    </div>
+  return (
+    <div className="bg-white">
+      <div className="mx-auto max-w-2xl py-4 px-4 sm:py-10 sm:px-6 lg:max-w-7xl lg:px-8">
+      <nav className="flex mb-4" aria-label="Breadcrumb">
+      <ol role="list" className="flex items-center ml-2 gap-x-1">
+        <li>
+          <div>
 
-                    {/* Product details */}
-                    <div className="max-w-2xl mx-auto mt-12 sm:mt-16 lg:max-w-none lg:mt-0 lg:row-end-2 lg:row-span-2 lg:col-span-3">
+            <a
+                className="text-sm font-medium text-gray-500 hover:text-gray-700"
+              >
+                Home
+              </a>
+          </div>
+        </li>
+        {pages.map((page) => (
+          <li key={page.name}>
+            <div className="flex items-center">
+              <svg
+                className="h-5 w-5 flex-shrink-0 text-gray-300"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                aria-hidden="true"
+              >
+                <path d="M5.555 17.776l8-16 .894.448-8 16-.894-.448z" />
+              </svg>
+              <a
+                href={page.href}
+                className="text-sm font-medium text-gray-500 hover:text-gray-700"
+                aria-current={page.current ? 'page' : undefined}
+              >
+                {page.name}
+              </a>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </nav>
+        <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
+          {/* Image gallery */}
+          <Tab.Group as="div" className="flex flex-col-reverse">
+            {/* Image selector */}
+            <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
+           
+              <Tab.List className="grid grid-cols-4 gap-6">
+                {product.images.map((image) => (
+                  <Tab
+                    key={image.id}
+                    className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
+                  >
+                    {({ selected }) => (
+                      <>
+                        <span className="sr-only"> {image.name} </span>
+                        <span className="absolute inset-0 overflow-hidden rounded-md">
+                          <img src={image.src} alt="" className="aspect-w-4 aspect-h-3 object-cover object-center" />
+                        </span>
+                        <span
+                          className={classNames(
+                            selected ? 'ring-indigo-500' : 'ring-transparent',
+                            'pointer-events-none absolute inset-0 rounded-md ring-2 ring-offset-2'
+                          )}
+                          aria-hidden="true"
+                        />
+                      </>
+                    )}
+                  </Tab>
+                ))}
+              </Tab.List>
+            </div>
 
+            <Tab.Panels className="aspect-w-4 aspect-h-3 w-full">
+              {product.images.map((image) => (
+                <Tab.Panel key={image.id} className="px-2 sm:px-0">
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="h-full w-full object-cover rounded-lg object-center sm:rounded-lg"
+                  />
+                </Tab.Panel>
+              ))}
+            </Tab.Panels>
+          </Tab.Group>
 
-                        <div className="flex flex-col-reverse">
-                            <div className="">
-                                <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">{getUniqueShoe?.data?.brand?.name} {getUniqueShoe?.data?.name}</h1>
-                                <h2 id="information-heading" className="sr-only">
-                                    Product information
-                                </h2>
-                                <p className="text-sm text-gray-500 mt-2">
-                                    {getUniqueShoe?.data?.color}
+          {/* Product info */}
+          <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+          <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">Adidas Samba OG</h1>
+          <p className="text-sm text-gray-500 mt-2">
+          Crystal White / Clay Strata / Gum
                                 </p>
-                            </div>
+            {/* Reviews */}
+            <div className="mt-3">
+            <span className="inline-flex items-center py-1  px-3 bg-gray-200 hover:bg-gray-300 rounded-full text-md font-semibold text-gray-600">
+	<span className="ml-1">
+	  Default Badge
+	</span>
+  </span>
+            </div>
 
-                        </div>
+            <div className="mt-6">
+              <h3 className="sr-only">Description</h3>
 
-                        <p className="text-gray-500 mt-6 text-justify pb-7 border-b">{product.description}</p>
+              <div
+                className="space-y-6 text-base text-gray-700 text-justify"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
+            </div>
 
-                        <div className='mt-7'>
-                            
-                            <div className='flex flex-col'>
-                                <h1 className='flex justify-center text-2xl font-extrabold tracking-tight mb-7 '>Pigskin?</h1>
-                            <div className='flex gap-x-5 justify-center'>
-                                <div className="flex items-center">
-                                    <svg className="h-4 w-4 -ml-6 mb-6 inline-block">
-                                        <circle cx="10" cy="10" r="5" fill="#4f46e5" />
-                                    </svg>
-                                    <div className='flex flex-col'>
-                                        <span className="ml-4 my-auto">True</span>
-                                        <span className="ml-4 my-auto font-semibold">98</span>
-                                    </div>
-                                  
-                                </div>
-                                <div className="flex items-center">
-                                    <svg className="h-4 w-4 mb-6 inline-block">
-                                        <circle cx="10" cy="10" r="5" fill="#c7d2fe" />
-                                    </svg>
-                                    <div className='flex flex-col'>
-                                        <span className="ml-4 my-auto">False</span>
-                                        <span className="ml-4 my-auto font-semibold">10</span>
-                                    </div>
-                                </div>
-                            </div>
-                            </div>
+            <form className="mt-6">
 
-                            <div className='flex justify-center -mt-2'>
-                                <svg width={300} height={300}>
-                                    <VictoryPie
-                                        standalone={false}
-                                        labelRadius={({ innerRadius }: any) => innerRadius + 5}
-                                        width={300}
-                                        height={300}
-                                        innerRadius={75}
-                                        colorScale={["#4f46e5", "#c7d2fe"]}
-                                        style={{ labels: { display: "none" } }}
-                                        data={[
-                                            { x: 1, y: 70 },
-                                            { x: 2, y: 40 },
-                                        ]}
-                                    />
-                                    <text
-                                        x={152} // Set the x-coordinate for the center of the text
-                                        y={170} // Set the y-coordinate for the center of the text
-                                        textAnchor="middle" // Center the text horizontally
-                                        dominantBaseline="middle" // Center the text vertically
-                                        style={{
-                                            fill: "black", // Set the text color
-                                            fontSize: "25px", // Set the font size
-                                            fontWeight: 500 , // Set the font weight
-                                        }}
-                                    >
-                                        95%
-                                    </text>
+     
 
-                                    <svg
-                                        x={130}
-                                        y={110}
-                                        width={40}
-                                        height={40}
-                                        viewBox="0 0 24 24"
-                                        fill="none"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="#4f46e5" className="w-6 h-6">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                    </svg>
-                                </svg>
-                            </div>
-                        </div>
+              <div className="sm:flex-col1 mt-8 w-full flex">
+                <button
+                  type="submit"
+                  className="flex flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 py-3 px-8 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 w-full"
+                >
+                  Add Review
+                </button>
+              </div>
+            </form>
 
-                        <div className="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
-                            <button
-                                type="button"
-                                className="w-full bg-indigo-600 border border-transparent py-3 px-8 flex items-center justify-center text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
+            <section aria-labelledby="details-heading" className="mt-10">
+              <h2 id="details-heading" className="sr-only">
+                Additional details
+              </h2>
+
+              <div className="divide-y divide-gray-200 border-t border-b">
+                {product.details.map((detail) => (
+                  <Disclosure as="div" key={detail.name}>
+                    {({ open }) => (
+                      <>
+                        <h3>
+                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                            <span
+                              className={classNames(open ? 'text-indigo-600' : 'text-gray-900', 'text-sm font-medium')}
                             >
-                                Rate True
-                            </button>
-                            <button
-                                type="button"
-                                className="w-full bg-indigo-50 border border-transparent py-3 px-8 flex items-center justify-center text-base font-medium text-indigo-700 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-50 focus:ring-indigo-500"
-                            >
-                                Rate False
-                            </button>
-                        </div>
-
-                        <div className="border-t border-gray-200 divide-y mt-10 pt-15 divide-gray-200">
-                            {products.details.map((detail) => (
-                                <Disclosure as="div" key={detail.name}>
-                                    {({ open }) => (
-                                        <>
-                                            <h3>
-                                                <Disclosure.Button className="group relative w-full py-6 flex justify-between items-center text-left">
-                                                    <span
-                                                        className={classNames(open ? 'text-indigo-600' : 'text-gray-900', 'text-sm font-medium')}
-                                                    >
-                                                        {detail.name}
-                                                    </span>
-                                                    <span className="ml-6 flex items-center">
-                                                        {open ? (
-                                                            <MinusSmIcon
-                                                                className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        ) : (
-                                                            <PlusSmIcon
-                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        )}
-                                                    </span>
-                                                </Disclosure.Button>
-                                            </h3>
-                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
-                                                <ul role="list">
-                                                    {detail.items.map((item) => (
-                                                        <li key={item}>{item}</li>
-                                                    ))}
-                                                </ul>
-                                            </Disclosure.Panel>
-                                        </>
-                                    )}
-                                </Disclosure>
+                              {detail.name}
+                            </span>
+                            <span className="ml-6 flex items-center">
+                              {open ? (
+                                <HiOutlineSquaresPlus
+                                  className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
+                                  aria-hidden="true"
+                                />
+                              ) : (
+                                <HiOutlineSquaresPlus
+                                  className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                  aria-hidden="true"
+                                />
+                              )}
+                            </span>
+                          </Disclosure.Button>
+                        </h3>
+                        <Disclosure.Panel as="div" className="prose prose-sm pb-6">
+                          <ul role="list">
+                            {detail.items.map((item) => (
+                              <li key={item}>{item}</li>
                             ))}
-                        </div>
+                          </ul>
+                        </Disclosure.Panel>
+                      </>
+                    )}
+                  </Disclosure>
+                ))}
+              </div>
+            </section>
+          </div>
+        </div>
 
-                        <div className="border-t border-gray-200 divide-y pt-15 divide-gray-200">
-                            {products.details.map((detail) => (
-                                <Disclosure as="div" key={detail.name}>
-                                    {({ open }) => (
-                                        <>
-                                            <h3>
-                                                <Disclosure.Button className="group relative w-full py-6 flex justify-between items-center text-left">
-                                                    <span
-                                                        className={classNames(open ? 'text-indigo-600' : 'text-gray-900', 'text-sm font-medium')}
-                                                    >
-                                                        {detail.name}
-                                                    </span>
-                                                    <span className="ml-6 flex items-center">
-                                                        {open ? (
-                                                            <MinusSmIcon
-                                                                className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        ) : (
-                                                            <PlusSmIcon
-                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        )}
-                                                    </span>
-                                                </Disclosure.Button>
-                                            </h3>
-                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
-                                                <ul role="list">
-                                                    {detail.items.map((item) => (
-                                                        <li key={item}>{item}</li>
-                                                    ))}
-                                                </ul>
-                                            </Disclosure.Panel>
-                                        </>
-                                    )}
-                                </Disclosure>
-                            ))}
-                        </div>
+      <div className="mt-8  px-4 mb-4 sm:px-0">
 
-                        <div className="border-t border-b border-gray-200 divide-y pt-15 divide-gray-200">
-                            {products.details.map((detail) => (
-                                <Disclosure as="div" key={detail.name}>
-                                    {({ open }) => (
-                                        <>
-                                            <h3>
-                                                <Disclosure.Button className="group relative w-full py-6 flex justify-between items-center text-left">
-                                                    <span
-                                                        className={classNames(open ? 'text-indigo-600' : 'text-gray-900', 'text-sm font-medium')}
-                                                    >
-                                                        {detail.name}
-                                                    </span>
-                                                    <span className="ml-6 flex items-center">
-                                                        {open ? (
-                                                            <MinusSmIcon
-                                                                className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        ) : (
-                                                            <PlusSmIcon
-                                                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                                                aria-hidden="true"
-                                                            />
-                                                        )}
-                                                    </span>
-                                                </Disclosure.Button>
-                                            </h3>
-                                            <Disclosure.Panel as="div" className="pb-6 prose prose-sm">
-                                                <ul role="list">
-                                                    {detail.items.map((item) => (
-                                                        <li key={item}>{item}</li>
-                                                    ))}
-                                                </ul>
-                                            </Disclosure.Panel>
-                                        </>
-                                    )}
-                                </Disclosure>
-                            ))}
-                        </div>
-                    </div>
 
-                    <div className="w-full max-w-2xl mx-auto mt-4 lg:max-w-none lg:mt-0 lg:col-span-4">
-                        <Tab.Group as="div">
+        <div className="space-y-10 divide-y divide-gray-200 border-b border-gray-200 pb-10">
+
+
+
+
+        <Tab.Group as="div">
                             <div className="border-b border-gray-200">
-                                <Tab.List className="-mb-px flex space-x-8">
+                                <Tab.List className=" flex space-x-8">
                                     <Tab
                                         className={({ selected }) =>
                                             classNames(
@@ -421,95 +301,70 @@ export default function Example() {
                                             )
                                         }
                                     >
-                                        Customer Reviews
+                                        User Reviews
                                     </Tab>
-                                    <Tab
-                                        className={({ selected }) =>
-                                            classNames(
-                                                selected
-                                                    ? 'border-indigo-600 text-indigo-600'
-                                                    : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                                                'whitespace-nowrap py-6 border-b-2 font-medium text-sm'
-                                            )
-                                        }
-                                    >
-                                        FAQ
-                                    </Tab>
-                                    <Tab
-                                        className={({ selected }) =>
-                                            classNames(
-                                                selected
-                                                    ? 'border-indigo-600 text-indigo-600'
-                                                    : 'border-transparent text-gray-700 hover:text-gray-800 hover:border-gray-300',
-                                                'whitespace-nowrap py-6 border-b-2 font-medium text-sm'
-                                            )
-                                        }
-                                    >
-                                        License
-                                    </Tab>
+
+
                                 </Tab.List>
                             </div>
                             <Tab.Panels as={Fragment}>
-                                <Tab.Panel className="-mb-10">
+                                <Tab.Panel>
                                     <h3 className="sr-only">Customer Reviews</h3>
 
-                                    {reviews.featured.map((review, reviewIdx) => (
-                                        <div key={review.id} className="flex text-sm text-gray-500 space-x-4">
-                                            <div className={classNames(reviewIdx === 0 ? '' : 'border-t border-gray-200', 'py-10')}>
-                                                <h3 className="font-medium text-gray-900">{review.author}</h3>
-                                                <p>
-                                                    <time dateTime={review.datetime}>{review.date}</time>
-                                                </p>
+                                    {reviews.map((review) => (
+            <div key={review.id} className="pt-10 lg:grid lg:grid-cols-12 lg:gap-x-8">
+              <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                <div className="flex items-center xl:col-span-1">
+                  <div className="flex items-center">
+                    {[0, 1, 2, 3, 4].map((rating) => (
+                      <HiOutlineSquaresPlus
+                        key={rating}
+                        className={classNames(
+                          review.rating > rating ? 'text-yellow-400' : 'text-gray-200',
+                          'h-5 w-5 flex-shrink-0'
+                        )}
+                        aria-hidden="true"
+                      />
+                    ))}
+                  </div>
+                  <p className="ml-3 text-sm text-gray-700">
+                    {review.rating}
+                    <span className="sr-only"> out of 5 stars</span>
+                  </p>
+                </div>
 
-                                                <div className="flex items-center mt-4">
-                                                    {[0, 1, 2, 3, 4].map((rating) => (
-                                                        <StarIcon
-                                                            key={rating}
-                                                            className={classNames(
-                                                                review.rating > rating ? 'text-yellow-400' : 'text-gray-300',
-                                                                'h-5 w-5 flex-shrink-0'
-                                                            )}
-                                                            aria-hidden="true"
-                                                        />
-                                                    ))}
-                                                </div>
-                                                <p className="sr-only">{review.rating} out of 5 stars</p>
+                <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                  <h3 className="text-sm font-medium text-gray-900">{review.title}</h3>
 
-                                                <div
-                                                    className="mt-4 prose prose-sm max-w-none text-gray-500 text-justify"
-                                                    dangerouslySetInnerHTML={{ __html: review.content }}
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
+                  <div
+                    className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
+                    dangerouslySetInnerHTML={{ __html: review.content }}
+                  />
+                </div>
+              </div>
+
+              <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                <p className="font-medium text-gray-900">{review.author}</p>
+                <time
+                  dateTime={review.datetime}
+                  className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
+                >
+                  {review.date}
+                </time>
+              </div>
+            </div>
+          ))}
                                 </Tab.Panel>
 
-                                <Tab.Panel as="dl" className="text-sm text-gray-500">
-                                    <h3 className="sr-only">Frequently Asked Questions</h3>
 
-                                    {faqs.map((faq) => (
-                                        <Fragment key={faq.question}>
-                                            <dt className="mt-10 font-medium text-gray-900">{faq.question}</dt>
-                                            <dd className="mt-2 prose prose-sm max-w-none text-gray-500">
-                                                <p>{faq.answer}</p>
-                                            </dd>
-                                        </Fragment>
-                                    ))}
-                                </Tab.Panel>
-
-                                <Tab.Panel className="pt-10">
-                                    <h3 className="sr-only">License</h3>
-
-                                    <div
-                                        className="prose prose-sm max-w-none text-gray-500"
-                                        dangerouslySetInnerHTML={{ __html: license.content }}
-                                    />
-                                </Tab.Panel>
                             </Tab.Panels>
                         </Tab.Group>
-                    </div>
-                </div>
-            </div>
+
+
+
         </div>
-    )
+      </div>
+</div>
+ </div>
+  )
 }
