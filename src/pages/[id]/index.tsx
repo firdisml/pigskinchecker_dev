@@ -10,22 +10,22 @@ const reviews = [
     rating: 5,
     content: `
       <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
-      <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
+
     `,
-    author: "Risako M",
-    date: "16 May 2021",
+    author: "Risako Maka",
+    date: "16 July 2023",
     datetime: "2021-01-06",
   },
   {
     id: 2,
-    title: "Can't say enough good things",
+    title: "Best bang for the buck!",
     rating: 5,
     content: `
-      <p>I was really pleased with the overall shopping experience. My order even included a little personal, handwritten note, which delighted me!</p>
-      <p>The product quality is amazing, it looks and feel even better than I had anticipated. Brilliant stuff! I would gladly recommend this store to my friends. And, now that I think of it... I actually have, many times!</p>
+      <p>The pigskin shoe is a stylish and comfortable choice. Made from high-quality pigskin leather, it offers a soft and luxurious feel. The durability is impressive, and the shoe maintains its pristine appearance over time !</p>
+      
     `,
-    author: "Risako M",
-    date: "16 May 2021",
+    author: "Holy Honda",
+    date: "12 June 2022",
     datetime: "2021-01-06",
   },
   // More reviews...
@@ -134,9 +134,9 @@ export default function Example() {
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-10 lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
         <nav className="mb-4 flex" aria-label="Breadcrumb">
-          <ol role="list" className="ml-2 flex items-center gap-x-1">
+          <ol role="list" className="ml-2 sm:ml-0 flex items-center gap-x-1">
             <li>
               <div>
                 <a className="text-sm font-medium text-gray-500 hover:text-gray-700">
@@ -217,7 +217,7 @@ export default function Example() {
           </Tab.Group>
 
           {/* Product info */}
-          <div className="mt-10 px-4 sm:mt-16 sm:px-0 lg:mt-0">
+          <div className="mt-5 px-4 sm:mt-16 sm:px-0 lg:mt-0">
             <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
               Adidas Samba OG
             </h1>
@@ -234,7 +234,7 @@ export default function Example() {
       </span>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-10 sm:mt-10">
               <h3 className="sr-only">Description</h3>
 
               <div
@@ -243,11 +243,11 @@ export default function Example() {
               />
             </div>
 
-            <form className="mt-10">
+            <form>
               <div className="sm:flex-col1 mt-8 flex w-full">
                 <button
                   type="submit"
-                  className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                 >
                   Add Review
                 </button>
@@ -255,10 +255,6 @@ export default function Example() {
             </form>
 
             <section aria-labelledby="details-heading" className="mt-10">
-              <h2 id="details-heading" className="sr-only">
-                Additional details
-              </h2>
-
               <div className="divide-y divide-gray-200 border-t border-b">
                 {product.details.map((detail) => (
                   <Disclosure as="div" key={detail.name}>
@@ -344,7 +340,7 @@ export default function Example() {
                 </div>
 
                 <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
-                  <h3 className="text-sm font-medium text-gray-900">{review.title}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900">{review.title}</h3>
 
                   <div
                     className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
@@ -354,7 +350,7 @@ export default function Example() {
               </div>
 
               <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-                <p className="font-medium text-gray-900">{review.author}</p>
+                <p className="font-semibold text-gray-900">{review.author}</p>
                 <time
                   dateTime={review.datetime}
                   className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
@@ -410,7 +406,7 @@ export default function Example() {
                 </div>
 
                 <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
-                  <h3 className="text-sm font-medium text-gray-900">{review.title}</h3>
+                  <h3 className="text-sm font-semibold text-gray-900">{review.title}</h3>
 
                   <div
                     className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
@@ -420,7 +416,7 @@ export default function Example() {
               </div>
 
               <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-                <p className="font-medium text-gray-900">{review.author}</p>
+                <p className="font-semibold text-gray-900">{review.author}</p>
                 <time
                   dateTime={review.datetime}
                   className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
