@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
-import { HiOutlineSquaresPlus, HiUser, HiChevronRight } from "react-icons/hi2";
+import { HiOutlineSquaresPlus, HiUser, HiChevronRight, HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { Fragment } from "react";
 
 const reviews = [
@@ -279,12 +279,12 @@ export default function Example() {
                             </span>
                             <span className="ml-6 flex items-center">
                               {open ? (
-                                <HiOutlineSquaresPlus
+                                < HiChevronUp
                                   className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
                                   aria-hidden="true"
                                 />
                               ) : (
-                                <HiOutlineSquaresPlus
+                                < HiChevronDown
                                   className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
                                   aria-hidden="true"
                                 />
