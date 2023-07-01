@@ -225,16 +225,23 @@ export default function Example() {
               Crystal White / Clay Strata / Gum
             </p>
             {/* Reviews */}
-            <div className="mt-3">
+            <div className=" flex mt-3 gap-x-3">
             <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
         <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
           <circle cx={4} cy={4} r={3} />
         </svg>
         Pigskin
       </span>
+      <span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
+        <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
+          <circle cx={4} cy={4} r={3} />
+        </svg>
+        <span className="tracking-normal">100% Agree</span>
+      </span>
             </div>
+            
 
-            <div className="mt-10 sm:mt-10">
+            <div className="mt-8 sm:mt-8">
               <h3 className="sr-only">Description</h3>
 
               <div
@@ -254,7 +261,7 @@ export default function Example() {
               </div>
             </form>
 
-            <section aria-labelledby="details-heading" className="mt-10">
+            <section aria-labelledby="details-heading" className="mt-12">
               <div className="divide-y divide-gray-200 border-t border-b">
                 {product.details.map((detail) => (
                   <Disclosure as="div" key={detail.name}>
