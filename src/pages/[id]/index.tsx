@@ -226,9 +226,12 @@ export default function Example() {
             </p>
             {/* Reviews */}
             <div className="mt-3">
-              <span className="text-sm inline-flex items-center  rounded-full bg-green-200 px-3 py-1 font-semibold text-gray-600 hover:bg-green-300">
-                <span className="ml-1">Pigskin</span>
-              </span>
+            <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+        <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+          <circle cx={4} cy={4} r={3} />
+        </svg>
+        Pigskin
+      </span>
             </div>
 
             <div className="mt-6">
@@ -240,7 +243,7 @@ export default function Example() {
               />
             </div>
 
-            <form className="mt-6">
+            <form className="mt-10">
               <div className="sm:flex-col1 mt-8 flex w-full">
                 <button
                   type="submit"
@@ -330,9 +333,12 @@ export default function Example() {
               <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                 <div className="flex items-center xl:col-span-1">
                   <div className="flex items-center">
-                  <span className="text-sm inline-flex items-center  rounded-full bg-green-200 px-3 py-1 font-semibold text-gray-600 hover:bg-green-300">
-                <span className="ml-1">Pigskin</span>
-              </span>
+                  <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+        <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+          <circle cx={4} cy={4} r={3} />
+        </svg>
+        Pigskin
+      </span>
                   </div>
                   
                 </div>
@@ -392,9 +398,13 @@ export default function Example() {
               <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                 <div className="flex items-center xl:col-span-1">
                   <div className="flex items-center">
-                  <span className="text-sm inline-flex items-center  rounded-full bg-green-200 px-3 py-1 font-semibold text-gray-600 hover:bg-green-300">
-                <span className="ml-1">Pigskin</span>
-              </span>
+                  
+                  <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+        <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+          <circle cx={4} cy={4} r={3} />
+        </svg>
+        Pigskin
+      </span>
                   </div>
                   
                 </div>
