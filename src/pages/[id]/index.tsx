@@ -226,7 +226,7 @@ export default function Example() {
             </p>
             {/* Reviews */}
             <div className="mt-3">
-              <span className="text-md inline-flex items-center  rounded-full bg-green-200 px-3 py-1 font-semibold text-gray-600 hover:bg-green-300">
+              <span className="text-sm inline-flex items-center  rounded-full bg-green-200 px-3 py-1 font-semibold text-gray-600 hover:bg-green-300">
                 <span className="ml-1">Pigskin</span>
               </span>
             </div>
@@ -319,7 +319,7 @@ export default function Example() {
           id="tabs"
           name="tabs"
           className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-          defaultValue={tabs.find((tab) => tab.current).name}
+          defaultValue={tabs.find((tab) => tab?.current)?.name}
         >
           {tabs.map((tab) => (
             <option key={tab.name}>{tab.name}</option>
