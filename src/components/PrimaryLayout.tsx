@@ -223,7 +223,7 @@ export default function PrimaryLayout(props: {
                                                                         <img className="h-10 w-12 " src={"https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57"} alt="" />
                                                                     </span>
                                                                     <div className="ml-5 truncate">
-                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.brand?.name?.concat(" ", shoe.name)}</p>
+                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.name}</p>
                                                                         <p className="truncate text-sm text-gray-500">{shoe.color}</p>
                                                                     </div>
                                                                 </div>
