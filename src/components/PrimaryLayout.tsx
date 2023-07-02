@@ -21,7 +21,11 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { useDebounce } from "use-debounce";
-
+import { Orbitron } from '@next/font/google'
+const orbitron = Orbitron({
+  subsets: ['latin'],
+  weight: ['900']
+})
 
 const tabs = [
     { name: 'All', href: '#', current: true },
@@ -68,7 +72,7 @@ export default function PrimaryLayout(props: {
                                     <div className="items-center">
                                         <div className="flex flex-shrink-0">
                                             <Link href="/" className="text-gray-600 font-bold dark:text-white mb-1.5 lg:text-3xl">
-                                                <h1><a className="font-bold text-xl">Pigskin Checker</a></h1>
+                                                <h1  className={orbitron.className} ><a className="tracking-wider text-xl">SOLEBITE</a></h1>
             
                                             </Link>
 
