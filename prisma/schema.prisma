@@ -68,27 +68,42 @@ model VerificationToken {
 }
 
 model Shoe {
-    id         String   @id @default(cuid())
-    name       String
-    uniqueName String   @unique
-    sku        String
-    color      String
-    brand      Brand    @relation(fields: [brandId], references: [id])
-    brandId    String
-    ratings    Rating[]
+    id              String   @id @default(cuid())
+    name            String
+    uniqueName      String   @unique
+    searchParameter String   @unique
+    sku             String
+    color           String
+    ratings         Rating[]
+    pictures        String[]
+    features        String[]
+    sources         String[]
+    sizing          String
+    description     String
+    model           Model?   @relation(fields: [modelId], references: [id])
+    modelId         String?
 }
 
 model Brand {
-    id   String  @id @default(cuid())
-    name String?
-    Shoe Shoe[]
+    id     String  @id @default(cuid())
+    name   String?
+    models Model[]
+}
+
+model Model {
+    id      String @id @default(cuid())
+    name    String @unique
+    brand   Brand  @relation(fields: [brandId], references: [id])
+    brandId String
+    shoes   Shoe[]
 }
 
 model Rating {
-    User   User   @relation(fields: [userId], references: [id])
-    userId String
-    Shoe   Shoe   @relation(fields: [shoeUniqueName], references: [uniqueName])
+    User           User    @relation(fields: [userId], references: [id])
+    userId         String
+    Shoe           Shoe    @relation(fields: [shoeUniqueName], references: [uniqueName])
     shoeUniqueName String
-    status Boolean
+    status         Boolean
+
     @@id([userId, shoeUniqueName])
 }

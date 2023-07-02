@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Disclosure, RadioGroup, Tab } from "@headlessui/react";
 import { HiOutlineSquaresPlus, HiUser, HiChevronRight, HiChevronDown, HiChevronUp } from "react-icons/hi2";
 import { Fragment } from "react";
+import { api } from "~/utils/api";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 const reviews = [
   {
@@ -130,7 +133,9 @@ function classNames(...classes: any) {
 }
 
 export default function Example() {
+  const router = useRouter()
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
+  const getUniqueShoe = api.shoe.getUniqueShoe.useQuery({ name: String(router.query.id) });
 
   return (
     <div className="bg-white">
@@ -174,17 +179,31 @@ export default function Example() {
             {/* Image selector */}
             <div className="mx-auto mt-6 hidden w-full max-w-2xl sm:block lg:max-w-none">
               <Tab.List className="grid grid-cols-4 gap-8">
-                {product.images.map((image) => (
+              {getUniqueShoe.isLoading || getUniqueShoe.isFetching ? (
+              <>
+              
+              <><div className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-gray-300">
+        <svg className="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"/></svg>
+    </div>
+    <div className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-gray-300">
+        <svg className="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"/></svg>
+    </div>
+    <div className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-gray-300">
+        <svg className="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"/></svg>
+    </div>
+    <div className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-gray-300">
+        <svg className="w-12 h-12 text-gray-200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"/></svg>
+    </div></>
+              </>) : (<>{getUniqueShoe?.data?.pictures?.map((image, index) => (
                   <Tab
-                    key={image.id}
+                    key={index}
                     className="relative flex h-24 cursor-pointer items-center justify-center rounded-md bg-white text-sm font-medium uppercase text-gray-900 hover:bg-gray-50 focus:outline-none focus:ring focus:ring-opacity-50 focus:ring-offset-4"
                   >
                     {({ selected }) => (
                       <>
-                        <span className="sr-only"> {image.name} </span>
                         <span className="absolute inset-0 overflow-hidden rounded-md">
                           <img
-                            src={image.src}
+                            src={image}
                             alt=""
                             className="aspect-h-3 aspect-w-4 object-cover object-center"
                           />
@@ -199,12 +218,15 @@ export default function Example() {
                       </>
                     )}
                   </Tab>
-                ))}
+                ))}</>)}
+                
               </Tab.List>
             </div>
 
             <Tab.Panels className="aspect-h-3 aspect-w-4 w-full mb-2">
-              {product.images.map((image) => (
+              {getUniqueShoe.isLoading || getUniqueShoe.isFetching ? (<><div className="flex items-center justify-center h-full w-full rounded-lg bg-gray-300 rounded dark:bg-gray-700">
+        <svg className="w-12 h-12 text-gray-200 dark:text-gray-600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" fill="currentColor" viewBox="0 0 640 512"><path d="M480 80C480 35.82 515.8 0 560 0C604.2 0 640 35.82 640 80C640 124.2 604.2 160 560 160C515.8 160 480 124.2 480 80zM0 456.1C0 445.6 2.964 435.3 8.551 426.4L225.3 81.01C231.9 70.42 243.5 64 256 64C268.5 64 280.1 70.42 286.8 81.01L412.7 281.7L460.9 202.7C464.1 196.1 472.2 192 480 192C487.8 192 495 196.1 499.1 202.7L631.1 419.1C636.9 428.6 640 439.7 640 450.9C640 484.6 612.6 512 578.9 512H55.91C25.03 512 .0006 486.1 .0006 456.1L0 456.1z"/></svg>
+    </div></>) : (<>{product.images.map((image) => (
                 <Tab.Panel key={image.id} className="px-2 sm:px-0">
                   <img
                     src={image.src}
@@ -212,232 +234,435 @@ export default function Example() {
                     className="h-full w-full rounded-lg object-cover object-center sm:rounded-lg"
                   />
                 </Tab.Panel>
-              ))}
+              ))}</>) }
+              
             </Tab.Panels>
           </Tab.Group>
 
-          {/* Product info */}
+          {/* Product Name */}
           <div className="mt-5 px-4 sm:mt-16 sm:px-0 lg:mt-0">
-            <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
-              Adidas Samba OG
-            </h1>
-            <p className="mt-2 text-sm text-gray-500">
-              Crystal White / Clay Strata / Gum
-            </p>
-            {/* Reviews */}
-            <div className=" flex mt-3 gap-x-3">
-            <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
-        <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-          <circle cx={4} cy={4} r={3} />
-        </svg>
-        Pigskin
-      </span>
-      <span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
-        <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-          <circle cx={4} cy={4} r={3} />
-        </svg>
-        <span className="tracking-normal">100% Agree</span>
-      </span>
-            </div>
+            {
+
+              getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
+
+                (
+                <>
+                <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+                <div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+                </>
+                )
+
+                :
+
+                <>
+                  <h1 className="text-2xl font-extrabold tracking-tight text-gray-900 sm:text-3xl">
+                    {getUniqueShoe?.data?.model?.brand?.name + " " + getUniqueShoe?.data?.name}
+                  </h1>
+
+                  <p className="mt-2 text-sm text-gray-500">
+                    {getUniqueShoe?.data?.color}
+                  </p>
+                </>
+                
+            }
+
             
 
-            <div className="mt-8 sm:mt-8">
-              <h3 className="sr-only">Description</h3>
 
+            {/* Reviews */}
+            <div className=" flex mt-3 gap-x-3">
+              <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                  <circle cx={4} cy={4} r={3} />
+                </svg>
+                Pigskin
+              </span>
+              <span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
+                <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
+                  <circle cx={4} cy={4} r={3} />
+                </svg>
+                <span className="tracking-normal">100% Agree</span>
+              </span>
+            </div>
+
+
+            {/* Description */}
+            {
+              
+              getUniqueShoe.isLoading || getUniqueShoe.isFetching ? 
+              
+              (
+              <div className="mt-8 sm:mt-8">
+                <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+                <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+                <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+              </div>
+              ) 
+              
+              : 
+              
+              (
+              <div className="mt-8 sm:mt-8">
               <div
                 className="space-y-6 text-justify text-base text-gray-700"
-                dangerouslySetInnerHTML={{ __html: product.description }}
+                dangerouslySetInnerHTML={{ __html: String(getUniqueShoe?.data?.description) }}
               />
-            </div>
+              </div>
+              ) 
+              
+            }
+            
 
-            <form>
-              <div className="sm:flex-col1 mt-8 flex w-full">
-                <button
+            {
+              
+              getUniqueShoe.isLoading || getUniqueShoe.isFetching ? 
+              
+              (
+                <div className="sm:flex-col1 mt-8 flex w-full">
+                  <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+                </div>
+              ) 
+            
+            :
+              
+              (
+                <div className="sm:flex-col1 mt-8 flex w-full">
+                  <button
                   type="submit"
                   className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                >
-                  Add Review
-                </button>
-              </div>
-            </form>
+                  >
+                    Add Review
+                  </button>
+                </div>
+              ) 
+            }
+            
 
-            <section aria-labelledby="details-heading" className="mt-12">
+            {getUniqueShoe.isLoading || getUniqueShoe.isFetching ? 
+            
+            (<section aria-labelledby="details-heading" className="mt-12">
+            <div role="status" className="w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
+    <div className="flex items-center justify-between">
+        <div>
+            <div className="h-3 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-3"></div>
+            <div className="w-32 h-2.5 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div className="h-3 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+    <div className="flex items-center justify-between pt-4">
+        <div>
+            <div className="h-3 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-3"></div>
+            <div className="w-32 h-2.5 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div className="h-3 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+    <div className="flex items-center justify-between pt-4">
+        <div>
+            <div className="h-3 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-3"></div>
+            <div className="w-32 h-2.5 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+        </div>
+        <div className="h-3 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+    </div>
+</div>
+            </section>) 
+            
+            
+            : (<section aria-labelledby="details-heading" className="mt-12">
               <div className="divide-y divide-gray-200 border-t border-b">
-                {product.details.map((detail) => (
-                  <Disclosure as="div" key={detail.name}>
-                    {({ open }) => (
-                      <>
-                        <h3>
-                          <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
-                            <span
-                              className={classNames(
-                                open ? "text-indigo-600" : "text-gray-900",
-                                "text-sm font-medium"
-                              )}
-                            >
-                              {detail.name}
-                            </span>
-                            <span className="ml-6 flex items-center">
-                              {open ? (
-                                < HiChevronUp
-                                  className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
-                                  aria-hidden="true"
-                                />
-                              ) : (
-                                < HiChevronDown
-                                  className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
-                                  aria-hidden="true"
-                                />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel
-                          as="div"
-                          className="prose prose-sm pb-6"
-                        >
-                          <ul role="list">
-                            {detail.items.map((item) => (
-                              <li key={item}>{item}</li>
-                            ))}
-                          </ul>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
+                <Disclosure as="div">
+                  {({ open }) => (
+                    <>
+                      <h3>
+                        <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                          <span
+                            className={classNames(
+                              open ? "text-indigo-600" : "text-gray-900",
+                              "text-sm font-medium"
+                            )}
+                          >
+                            Features
+                          </span>
+                          <span className="ml-6 flex items-center">
+                            {open ? (
+                              < HiChevronUp
+                                className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              < HiChevronDown
+                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
+                        </Disclosure.Button>
+                      </h3>
+                      <Disclosure.Panel
+                        as="div"
+                        className="prose prose-sm pb-6"
+                      >
+                        <ul role="list">
+                          {getUniqueShoe?.data?.features?.map((item) => (
+                            <li key={item}>{item}</li>
+                          ))}
+                        </ul>
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+                <Disclosure as="div">
+                  {({ open }) => (
+                    <>
+                      <h3>
+                        <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                          <span
+                            className={classNames(
+                              open ? "text-indigo-600" : "text-gray-900",
+                              "text-sm font-medium"
+                            )}
+                          >
+                            Sources
+                          </span>
+                          <span className="ml-6 flex items-center">
+                            {open ? (
+                              < HiChevronUp
+                                className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              < HiChevronDown
+                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
+                        </Disclosure.Button>
+                      </h3>
+                      <Disclosure.Panel
+                        as="div"
+                        className="prose prose-sm pb-6 text-justify"
+                      >
+                        <ul role="list">
+                          {getUniqueShoe?.data?.sources?.map((item, index) => (
+                            <li key={index}><Link href={item}>Source {index + 1}</Link></li>
+                          ))}
+                        </ul>
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+                <Disclosure as="div">
+                  {({ open }) => (
+                    <>
+                      <h3>
+                        <Disclosure.Button className="group relative flex w-full items-center justify-between py-6 text-left">
+                          <span
+                            className={classNames(
+                              open ? "text-indigo-600" : "text-gray-900",
+                              "text-sm font-medium"
+                            )}
+                          >
+                            Sizing Guide
+                          </span>
+                          <span className="ml-6 flex items-center">
+                            {open ? (
+                              < HiChevronUp
+                                className="block h-6 w-6 text-indigo-400 group-hover:text-indigo-500"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              < HiChevronDown
+                                className="block h-6 w-6 text-gray-400 group-hover:text-gray-500"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </span>
+                        </Disclosure.Button>
+                      </h3>
+                      <Disclosure.Panel
+                        as="div"
+                        className="prose prose-sm pb-6"
+                      >
+                        {getUniqueShoe?.data?.sizing}
+                      </Disclosure.Panel>
+                    </>
+                  )}
+                </Disclosure>
+              </div>
+            </section>) }
+            
+          </div>
+        </div>
+
+        {getUniqueShoe.isLoading || getUniqueShoe.isFetching ? (
+
+<><div role="status" className="w-full p-4 mt-12 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700 mb-10">
+        <div className="flex items-center justify-between">
+            <div>
+                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div className="flex items-center justify-between pt-4">
+            <div>
+                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div className="flex items-center justify-between pt-4">
+            <div>
+                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div className="flex items-center justify-between pt-4">
+            <div>
+                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <div className="flex items-center justify-between pt-4">
+            <div>
+                <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-600 w-24 mb-2.5"></div>
+                <div className="w-32 h-2 bg-gray-200 rounded-full dark:bg-gray-700"></div>
+            </div>
+            <div className="h-2.5 bg-gray-300 rounded-full dark:bg-gray-700 w-12"></div>
+        </div>
+        <span className="sr-only">Loading...</span>
+    </div></>
+
+        ) : (<><div className="mb-4 px-4 sm:px-0 mt-8">
+          <div className="space-y-10 divide-y divide-gray-200 border-gray-200 pb-10">
+
+            <div>
+
+              <div className="sm:hidden">
+                <label htmlFor="tabs" className="sr-only">
+                  Select a tab
+                </label>
+                {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
+                <select
+                  id="tabs"
+                  name="tabs"
+                  className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+                  defaultValue={tabs.find((tab) => tab?.current)?.name}
+                >
+                  {tabs.map((tab) => (
+                    <option key={tab.name}>{tab.name}</option>
+                  ))}
+                </select>
+                {reviews.map((review) => (
+                  <div key={review.id} className="pt-8 lg:grid border-b pb-8 lg:grid-cols-12 lg:gap-x-8">
+                    <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                      <div className="flex items-center xl:col-span-1">
+                        <div className="flex items-center">
+                          <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                            <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                              <circle cx={4} cy={4} r={3} />
+                            </svg>
+                            Pigskin
+                          </span>
+                        </div>
+
+                      </div>
+
+                      <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                        <h3 className="text-sm font-semibold text-gray-900">{review.title}</h3>
+
+                        <div
+                          className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
+                          dangerouslySetInnerHTML={{ __html: review.content }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                      <p className="font-semibold text-gray-900">{review.author}</p>
+                      <time
+                        dateTime={review.datetime}
+                        className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
+                      >
+                        {review.date}
+                      </time>
+                    </div>
+                  </div>
                 ))}
               </div>
-            </section>
-          </div>
-        </div>
 
-        <div className="mb-4 px-4 sm:px-0 mt-8">
-        <div className="space-y-10 divide-y divide-gray-200 border-gray-200 pb-10">
-         
-        <div>
+              <div className="hidden sm:block">
+                <div className="border-b  mt-5 border-gray-200">
+                  <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+                    {tabs.map((tab) => (
+                      <a
+                        key={tab.name}
+                        href={tab.href}
+                        className={classNames(
+                          tab.current
+                            ? 'border-indigo-500 text-indigo-600'
+                            : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
+                          'group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm'
+                        )}
+                        aria-current={tab.current ? 'page' : undefined}
+                      >
+                        <tab.icon
+                          className={classNames(
+                            tab.current ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
+                            '-ml-0.5 mr-2 h-5 w-5'
+                          )}
+                          aria-hidden="true"
+                        />
+                        <span>{tab.name}</span>
+                      </a>
+                    ))}
+                  </nav>
+                </div>
+                {reviews.map((review) => (
+                  <div key={review.id} className="pt-10 lg:grid border-b pb-10 lg:grid-cols-12 lg:gap-x-8">
+                    <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
+                      <div className="flex items-center xl:col-span-1">
+                        <div className="flex items-center">
 
-          <div className="sm:hidden">
-        <label htmlFor="tabs" className="sr-only">
-          Select a tab
-        </label>
-        {/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
-        <select
-          id="tabs"
-          name="tabs"
-          className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-          defaultValue={tabs.find((tab) => tab?.current)?.name}
-        >
-          {tabs.map((tab) => (
-            <option key={tab.name}>{tab.name}</option>
-          ))}
-        </select>
-        {reviews.map((review) => (
-            <div key={review.id} className="pt-8 lg:grid border-b pb-8 lg:grid-cols-12 lg:gap-x-8">
-              <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
-                <div className="flex items-center xl:col-span-1">
-                  <div className="flex items-center">
-                  <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
-        <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-          <circle cx={4} cy={4} r={3} />
-        </svg>
-        Pigskin
-      </span>
+                          <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                            <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                              <circle cx={4} cy={4} r={3} />
+                            </svg>
+                            Pigskin
+                          </span>
+                        </div>
+
+                      </div>
+
+                      <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
+                        <h3 className="text-sm font-semibold text-gray-900">{review.title}</h3>
+
+                        <div
+                          className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
+                          dangerouslySetInnerHTML={{ __html: review.content }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
+                      <p className="font-semibold text-gray-900">{review.author}</p>
+                      <time
+                        dateTime={review.datetime}
+                        className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
+                      >
+                        {review.date}
+                      </time>
+                    </div>
                   </div>
-                  
-                </div>
+                ))}
 
-                <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
-                  <h3 className="text-sm font-semibold text-gray-900">{review.title}</h3>
-
-                  <div
-                    className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
-                    dangerouslySetInnerHTML={{ __html: review.content }}
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-                <p className="font-semibold text-gray-900">{review.author}</p>
-                <time
-                  dateTime={review.datetime}
-                  className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
-                >
-                  {review.date}
-                </time>
               </div>
             </div>
-          ))}
-      </div>
-      
-      <div className="hidden sm:block">
-        <div className="border-b  mt-5 border-gray-200">
-          <nav className="-mb-px flex space-x-8" aria-label="Tabs">
-            {tabs.map((tab) => (
-              <a
-                key={tab.name}
-                href={tab.href}
-                className={classNames(
-                  tab.current
-                    ? 'border-indigo-500 text-indigo-600'
-                    : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300',
-                  'group inline-flex items-center py-4 px-1 border-b-2 font-medium text-sm'
-                )}
-                aria-current={tab.current ? 'page' : undefined}
-              >
-                <tab.icon
-                  className={classNames(
-                    tab.current ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
-                    '-ml-0.5 mr-2 h-5 w-5'
-                  )}
-                  aria-hidden="true"
-                />
-                <span>{tab.name}</span>
-              </a>
-            ))}
-          </nav>
-        </div>
-        {reviews.map((review) => (
-            <div key={review.id} className="pt-10 lg:grid border-b pb-10 lg:grid-cols-12 lg:gap-x-8">
-              <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
-                <div className="flex items-center xl:col-span-1">
-                  <div className="flex items-center">
-                  
-                  <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
-        <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-          <circle cx={4} cy={4} r={3} />
-        </svg>
-        Pigskin
-      </span>
-                  </div>
-                  
-                </div>
-
-                <div className="mt-4 lg:mt-6 xl:col-span-2 xl:mt-0">
-                  <h3 className="text-sm font-semibold text-gray-900">{review.title}</h3>
-
-                  <div
-                    className="mt-3 space-y-6 text-sm text-gray-500 text-justify"
-                    dangerouslySetInnerHTML={{ __html: review.content }}
-                  />
-                </div>
-              </div>
-
-              <div className="mt-6 flex items-center text-sm lg:col-span-4 lg:col-start-1 lg:row-start-1 lg:mt-0 lg:flex-col lg:items-start xl:col-span-3">
-                <p className="font-semibold text-gray-900">{review.author}</p>
-                <time
-                  dateTime={review.datetime}
-                  className="ml-4 border-l border-gray-200 pl-4 text-gray-500 lg:ml-0 lg:mt-2 lg:border-0 lg:pl-0"
-                >
-                  {review.date}
-                </time>
-              </div>
-            </div>
-          ))}
-
-      </div>
-      </div>
           </div>
-        </div>
+        </div></>)}
+        
       </div>
     </div>
   );

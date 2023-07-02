@@ -16,7 +16,11 @@ export const shoeRouter = createTRPCRouter({
                     uniqueName: input.name
                 },
                 include: {
-                    brand: true
+                    model: {
+                        include: {
+                            brand:true
+                        }
+                    }
                 }
             })
         }),
@@ -27,7 +31,11 @@ export const shoeRouter = createTRPCRouter({
             skip: 0,
             take: 5,
             include: {
-                brand: true
+                model: {
+                    include: {
+                        brand:true
+                    }
+                }
             }
         })
     }),
@@ -83,7 +91,11 @@ export const shoeRouter = createTRPCRouter({
           },
         },
         include: {
-            brand:true
+            model: {
+                include: {
+                    brand:true
+                }
+            }
         }
       });
     }),
