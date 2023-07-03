@@ -41,41 +41,55 @@ export const shoeRouter = createTRPCRouter({
     }),
 
     addRating: protectedProcedure
-        .input(z.object({ userId: z.string(), shoeUniqueName: z.string(), status: z.boolean() }))
+        .input(z.object({ userId: z.string(), shoeUniqueName: z.string(), title: z.string(), body: z.string(), status: z.boolean() }))
         .mutation(({ input, ctx }) => {
-            return ctx.prisma.rating.upsert({
-                where: {
-                    userId_shoeUniqueName: {
-                        userId: input.userId,
-                        shoeUniqueName: input.userId
-                    }
-                },
-                update: {
-                    status: input.status
-                },
-                create: {
+            return ctx.prisma.rating.create({
+                data: {
                     shoeUniqueName: input.shoeUniqueName,
                     userId: input.userId,
+                    title: input.title,
+                    body: input.body,
                     status: input.status
                 }
             })
         }),
 
-    getRatingCount: publicProcedure.input(z.object({ shoeUniqueName: z.string(), status: z.boolean() })).query(({ input, ctx }) => {
+    getRatingCount: publicProcedure.input(z.object({ name: z.string(), status: z.boolean() })).query(({ input, ctx }) => {
         return ctx.prisma.rating.count({
             where: {
-                shoeUniqueName: input.shoeUniqueName,
+                shoeUniqueName: input.name,
                 status: input.status
             }
         })
     }),
 
-    getUniqueRating: publicProcedure .input(z.object({ userId: z.string(), shoeUniqueName: z.string()})).query(({ input, ctx }) => {
+    getAllRatingCount: publicProcedure.input(z.object({ name: z.string() })).query(({ input, ctx }) => {
+        return ctx.prisma.rating.count({
+            where: {
+                shoeUniqueName: input.name,
+            },
+        })
+    }),
+
+    getAllRating: publicProcedure.input(z.object({ name: z.string() })).query(({ input, ctx }) => {
+        return ctx.prisma.rating.findMany({
+            skip: 0,
+            take : 5,
+            where: {
+                shoeUniqueName: input.name,
+            },
+            include: {
+                User:true
+            }
+        })
+    }),
+
+    getUniqueRating: publicProcedure .input(z.object({ userId: z.string(), name: z.string()})).query(({ input, ctx }) => {
         return ctx.prisma.rating.findUnique({
             where: {
                 userId_shoeUniqueName: {
                     userId: input.userId,
-                    shoeUniqueName: input.shoeUniqueName
+                    shoeUniqueName: input.name
                 }
             }
         })
