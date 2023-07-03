@@ -100,11 +100,15 @@ model Model {
 }
 
 model Rating {
-    User           User    @relation(fields: [userId], references: [id])
+    User           User     @relation(fields: [userId], references: [id])
     userId         String
-    Shoe           Shoe    @relation(fields: [shoeUniqueName], references: [uniqueName])
+    Shoe           Shoe     @relation(fields: [shoeUniqueName], references: [uniqueName])
     shoeUniqueName String
+    title          String
+    body           String
     status         Boolean
+    createdAt      DateTime @default(now())
+    updatedAt      DateTime @updatedAt
 
     @@id([userId, shoeUniqueName])
 }
