@@ -395,7 +395,7 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
                 >
                   Already Reviewed
                 </button>
-              </div></>) : <div className="sm:flex-col1 mt-8 flex w-full">
+              </div></>) : <>{sessionData ? (<><div className="sm:flex-col1 mt-8 flex w-full">
                     <button
                       onClick={() => setOpen(open ? false : true)}
                       type="submit"
@@ -403,7 +403,16 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
                     >
                       Add Review
                     </button>
-                  </div>}</>
+                  </div></>) :(<><div className="sm:flex-col1 mt-8 flex w-full">
+                    <button
+                      onClick={() => setOpen(open ? false : true)}
+                      type="submit"
+                      disabled
+                      className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                    >
+                      Please Login To Add Review
+                    </button>
+                  </div></>) }</>}</>
             }
 
 
