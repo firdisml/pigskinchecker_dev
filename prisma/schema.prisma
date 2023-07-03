@@ -78,8 +78,9 @@ model Shoe {
     pictures        String[]
     features        String[]
     sources         String[]
-    sizing          String
+    sizing          String[]
     description     String
+    status          Boolean
     model           Model?   @relation(fields: [modelId], references: [id])
     modelId         String?
 }

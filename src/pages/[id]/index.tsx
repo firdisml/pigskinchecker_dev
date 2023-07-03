@@ -480,9 +480,13 @@ export default function Example() {
                       </h3>
                       <Disclosure.Panel
                         as="div"
-                        className="prose prose-sm pb-6"
+                        className="prose prose-sm pb-6 text-justify"
                       >
-                        {getUniqueShoe?.data?.sizing}
+                        <ul role="list">
+                          {getUniqueShoe?.data?.sizing?.map((item, index) => (
+                            <li key={index}><p>{item}</p></li>
+                          ))}
+                        </ul>
                       </Disclosure.Panel>
                     </>
                   )}
