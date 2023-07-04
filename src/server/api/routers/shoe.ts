@@ -100,7 +100,7 @@ export const shoeRouter = createTRPCRouter({
     .query(async ({ ctx, input }) => {
       return ctx.prisma.shoe.findMany({
         where: {
-          uniqueName: {
+          searchParameter: {
             contains: input.name,
           },
         },
