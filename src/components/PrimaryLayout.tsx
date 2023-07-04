@@ -217,17 +217,18 @@ export default function PrimaryLayout(props: {
 
 
                                             {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 divide-y divide-gray-200 overflow-y-auto">
-                                                {searchShoe.isLoading || searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
+                                                {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
                                                     <li key={index}>
                                                         <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
                                                             <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
                                                                 <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
                                                                 <div className="relative flex min-w-0 flex-1 items-center">
                                                                     <span className="relative inline-block flex-shrink-0">
-                                                                        <img className="h-10 w-12 " src={"https://images.stockx.com/images/adidas-Samba-OG-Clay-Strata.jpg?fit=fill&bg=FFFFFF&w=480&h=320&fm=webp&auto=compress&dpr=1&trim=color&updated_at=1685042121&q=57"} alt="" />
+                                                                        <img className="h-10 w-12 " src={shoe?.pictures[0]} alt="" />
                                                                     </span>
                                                                     <div className="ml-5 truncate">
-                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.name}</p>
+                                                                        {/*@ts-ignore*/}
+                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
                                                                         <p className="truncate text-sm text-gray-500">{shoe.color}</p>
                                                                     </div>
                                                                 </div>
