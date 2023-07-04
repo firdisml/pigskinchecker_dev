@@ -182,7 +182,7 @@ export default function Example() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-        <nav className="mb-4 flex" aria-label="Breadcrumb">
+        {getUniqueShoe.isFetching ? (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>): (<><nav className="mb-4 flex" aria-label="Breadcrumb">
           <ol role="list" className="ml-2 sm:ml-0 flex items-center gap-x-1">
             <li>
               <div>
@@ -205,7 +205,7 @@ export default function Example() {
                 <a
                   className="text-sm font-medium text-gray-500 hover:text-gray-700"
                 >
-                  Adidas
+                  {getUniqueShoe?.data?.model?.brand?.name}
                 </a>
               </div>
             </li>
@@ -223,12 +223,12 @@ export default function Example() {
                 <a
                   className="text-sm font-medium text-gray-500 hover:text-gray-700"
                 >
-                  Samba
+                  {getUniqueShoe?.data?.model?.name}
                 </a>
               </div>
             </li>
           </ol>
-        </nav>
+        </nav></>)}
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-8">
           {/* Image gallery */}
           <Tab.Group as="div" className="flex flex-col-reverse">
