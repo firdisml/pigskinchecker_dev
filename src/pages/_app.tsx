@@ -6,6 +6,8 @@ import "~/styles/globals.css";
 import PrimaryLayout from "~/components/PrimaryLayout";
 import { ThemeProvider } from 'next-themes';
 import { IBM_Plex_Sans } from '@next/font/google'
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+
 const ibmplexsans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400']
@@ -19,6 +21,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
       <SessionProvider session={session}>
         <main className={ibmplexsans.className}>
           <PrimaryLayout>
+            <ReactQueryDevtools initialIsOpen={true} />
             <Component {...pageProps} />
           </PrimaryLayout>
         </main>

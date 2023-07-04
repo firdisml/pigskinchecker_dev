@@ -325,28 +325,31 @@ export default function Example() {
 
 
             {/* Reviews */}
-            <div className=" flex mt-3 gap-x-3">
-              <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
-                <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                  <circle cx={4} cy={4} r={3} />
-                </svg>
-                Contains Pigskin
-              </span>
 
-              {getAllRatingCount.isFetching && getAgreeRatingCount.isFetching ? (<><span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
-                <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-                  <circle cx={4} cy={4} r={3} />
-                </svg>
-                <span className="tracking-normal">Loading</span>
-              </span></>):(<span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
-                <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-                  <circle cx={4} cy={4} r={3} />
-                </svg>
-                {/*@ts-ignore*/}
-                <span className="tracking-normal">{getAgreeRatingCount?.data ? ((getAgreeRatingCount?.data / getAllRatingCount?.data) * 100) + "% Agreed" : "0% Agreed"}</span>
-              </span>)}
+            {
 
-            </div>
+getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
+(<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>) : (<><div className=" flex mt-3 gap-x-3">
+<span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+  <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+    <circle cx={4} cy={4} r={3} />
+  </svg>
+  Contains Pigskin
+</span>
+
+{getAllRatingCount.isFetching && getAgreeRatingCount.isFetching ? (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>):(<span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
+  <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
+    <circle cx={4} cy={4} r={3} />
+  </svg>
+  {/*@ts-ignore*/}
+  <span className="tracking-normal">{getAgreeRatingCount?.data ? ((getAgreeRatingCount?.data / getAllRatingCount?.data) * 100) + "% Agreed" : "0% Agreed"}</span>
+</span>)}
+
+
+
+
+</div></>)}
+            
 
 
             {/* Description */}
@@ -356,7 +359,6 @@ export default function Example() {
 
                 (
                   <div className="mt-8 sm:mt-8">
-                    <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
                     <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
                     <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
                   </div>
@@ -498,7 +500,7 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
 
             {getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
 
-              (<section aria-labelledby="details-heading" className="mt-12">
+              (<section aria-labelledby="details-heading" className="mt-9">
                 <div role="status" className="w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
                   <div className="flex items-center justify-between">
                     <div>
