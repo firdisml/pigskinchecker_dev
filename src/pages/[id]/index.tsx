@@ -163,12 +163,12 @@ export default function Example() {
   });
   const [title, set_title] = useState<String>()
   const [body, set_body] = useState<String>()
-  const [review_status, set_review_status] = useState<Boolean>(true) 
+  const [review_status, set_review_status] = useState<Boolean>(true)
   const [open, setOpen] = useState(false)
   const cancelButtonRef = useRef(null)
 
   console.log(review_status)
-  async function handle_add_rating(e:any) {
+  async function handle_add_rating(e: any) {
     e.preventDefault()
     addRating.mutate({
       userId: String(sessionData?.user?.id),
@@ -182,7 +182,7 @@ export default function Example() {
   return (
     <div className="bg-white">
       <div className="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-4 lg:max-w-7xl lg:px-8">
-        {getUniqueShoe.isFetching ? (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>): (<><nav className="mb-4 flex" aria-label="Breadcrumb">
+        {getUniqueShoe.isFetching ? (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>) : (<><nav className="mb-4 flex" aria-label="Breadcrumb">
           <ol role="list" className="ml-2 sm:ml-0 flex items-center gap-x-1">
             <li>
               <div>
@@ -328,28 +328,28 @@ export default function Example() {
 
             {
 
-getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
-(<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>) : (<><div className=" flex mt-3 gap-x-3">
-<span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
-  <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-    <circle cx={4} cy={4} r={3} />
-  </svg>
-  Contains Pigskin
-</span>
+              getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
+                (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>) : (<><div className=" flex mt-3 gap-x-3">
+                  <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-sm font-medium text-indigo-800">
+                    <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                      <circle cx={4} cy={4} r={3} />
+                    </svg>
+                    {getUniqueShoe?.data?.status ? "Contains Pigskin" : "No Pigskin"}
+                  </span>
 
-{getAllRatingCount.isFetching && getAgreeRatingCount.isFetching ? (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>):(<span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
-  <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
-    <circle cx={4} cy={4} r={3} />
-  </svg>
-  {/*@ts-ignore*/}
-  <span className="tracking-normal">{getAgreeRatingCount?.data ? ((getAgreeRatingCount?.data / getAllRatingCount?.data) * 100) + "% Agreed" : "0% Agreed"}</span>
-</span>)}
-
-
+                  {getAllRatingCount.isFetching && getAgreeRatingCount.isFetching ? (<><div className="mt-2 h-5 w-25 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div></>) : (<span className="inline-flex items-center gap-x-1 rounded-full bg-green-100 px-3 py-0.5 text-sm font-medium text-green-800">
+                    <svg className="-ml-1 mr-1.5 h-2 w-2 text-green-400" fill="currentColor" viewBox="0 0 8 8">
+                      <circle cx={4} cy={4} r={3} />
+                    </svg>
+                    {/*@ts-ignore*/}
+                    <span className="tracking-normal">{getAgreeRatingCount?.data ? ((getAgreeRatingCount?.data / getAllRatingCount?.data) * 100) + "% Agreed" : "0% Agreed"}</span>
+                  </span>)}
 
 
-</div></>)}
-            
+
+
+                </div></>)}
+
 
 
             {/* Description */}
@@ -380,7 +380,7 @@ getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
 
             {
 
-getUniqueRating.isLoading || getUniqueRating.isFetching ?
+              getUniqueRating.isLoading || getUniqueRating.isFetching ?
 
                 (
                   <div className="sm:flex-col1 mt-8 flex w-full">
@@ -389,21 +389,21 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
                 )
 
                 : <>{getUniqueRating?.data ? (<>
-                
-                <div className="sm:flex-col1 mt-8 flex w-full">
-                  <button
-                    onClick={() => setOpen(open ? false : true)}
-                    type="submit"
-                    disabled
-                    className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                  >
-                    Already Reviewed
-                  </button>
-                </div>
-              
-              </>) : <>{sessionData ? (<>
-              
-              <div className="sm:flex-col1 mt-8 flex w-full">
+
+                  <div className="sm:flex-col1 mt-8 flex w-full">
+                    <button
+                      onClick={() => setOpen(open ? false : true)}
+                      type="submit"
+                      disabled
+                      className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                    >
+                      Already Reviewed
+                    </button>
+                  </div>
+
+                </>) : <>{sessionData ? (<>
+
+                  <div className="sm:flex-col1 mt-8 flex w-full">
                     <button
                       onClick={() => setOpen(open ? false : true)}
                       type="submit"
@@ -411,18 +411,18 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
                     >
                       Add Review
                     </button>
-                  </div></>) :(<>
-                  
-              <div className="sm:flex-col1 mt-8 flex w-full">
-                    <button
-                      onClick={() => setOpen(open ? false : true)}
-                      type="submit"
-                      disabled
-                      className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                    >
-                      Please Login To Add Review
-                    </button>
-                  </div></>) }</>}</>
+                  </div></>) : (<>
+
+                    <div className="sm:flex-col1 mt-8 flex w-full">
+                      <button
+                        onClick={() => setOpen(open ? false : true)}
+                        type="submit"
+                        disabled
+                        className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      >
+                        Please Login To Add Review
+                      </button>
+                    </div></>)}</>}</>
             }
 
 
@@ -435,54 +435,52 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
                 <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">
                   &#8203;
                 </span>
-                <div className="relative inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+                <div className="relative w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                    <div className="">
-                      <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                        <Dialog.Title as="h3" className="text-lg leading-6 font-medium text-gray-900">
-                          Add Review
-                        </Dialog.Title>
-                        <div className="mt-2">
-                          <div className="mt-1">
-      <select
-                  id="tabs"
-                  name="tabs"
-                  className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
-                  defaultValue={1}
-                  onChange={(e) => {set_review_status(Boolean(parseInt(e.currentTarget.value)))}}
-                >
-                  <option value={1}>Agree</option>
-                  <option value={0}>Disagree</option>
-                </select>
-      <div className="mt-1">
-        <input
-          type="email"
-          name="email"
-          id="email"
-          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-          placeholder="Review Title"
-          onChange={(e) => set_title(e.currentTarget.value)}
-          aria-describedby="email-optional"
-        />
-      </div>
+                      <Dialog.Title as="h3" className="text-lg font-medium text-gray-900 mb-5">
+                        Add Review
+                      </Dialog.Title>
+                        <div>
+                          <div className="mb-5">
+                            <label className="text-md font-semibold text-gray-500">Review Status</label>
+                            <select
+                              id="tabs"
+                              name="tabs"
+                              className="block w-full text-sm rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-2"
+                              defaultValue={1}
+                              onChange={(e) => { set_review_status(Boolean(parseInt(e.currentTarget.value))) }}
+                            >
+                              <option value={1}>Agree</option>
+                              <option value={0}>Disagree</option>
+                            </select>
                           </div>
-                          <div className="mt-1">
-                            <textarea
-                              placeholder="Review Body"
-                              name="comment"
-                              id="comment"
-                              onChange={(e) => set_body(e.currentTarget.value)}
-                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
-                              defaultValue={''}
+
+                          <div className="mb-5">
+                            <label className="text-md font-semibold text-gray-500">Review Title</label>
+                            <input
+                              type="email"
+                              name="email"
+                              id="email"
+                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
+                              placeholder="Review Title"
+                              onChange={(e) => set_title(e.currentTarget.value)}
+                              aria-describedby="email-optional"
                             />
                           </div>
-                          <div>
-
-      
-    </div>
                         </div>
-                      </div>
-                    </div>
+                        <div>
+                          <label className="text-md font-semibold text-gray-500">Review Body</label>
+                          <textarea
+                            placeholder="Review Body"
+                            name="comment"
+                            id="comment"
+                            onChange={(e) => set_body(e.currentTarget.value)}
+                            className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
+                            defaultValue={''}
+                          />
+                        </div>
+                        <div>
+                        </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button
