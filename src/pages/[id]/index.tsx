@@ -384,33 +384,41 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
 
                 (
                   <div className="sm:flex-col1 mt-8 flex w-full">
-                    <div className="h-10 w-full animate-pulse bg-gray-200 rounded-md dark:bg-gray-700 mb-4"></div>
+                    <div className="h-10 w-full flex-1 animate-pulse bg-gray-200 rounded-md dark:bg-gray-700"></div>
                   </div>
                 )
 
-                : <>{getUniqueRating?.data ? (<><div className="sm:flex-col1 mt-8 flex w-full">
-                <button
-                  onClick={() => setOpen(open ? false : true)}
-                  type="submit"
-                  disabled
-                  className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                >
-                  Already Reviewed
-                </button>
-              </div></>) : <>{sessionData ? (<><div className="sm:flex-col1 mt-8 flex w-full">
+                : <>{getUniqueRating?.data ? (<>
+                
+                <div className="sm:flex-col1 mt-8 flex w-full">
+                  <button
+                    onClick={() => setOpen(open ? false : true)}
+                    type="submit"
+                    disabled
+                    className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                  >
+                    Already Reviewed
+                  </button>
+                </div>
+              
+              </>) : <>{sessionData ? (<>
+              
+              <div className="sm:flex-col1 mt-8 flex w-full">
                     <button
                       onClick={() => setOpen(open ? false : true)}
                       type="submit"
-                      className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-2 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                     >
                       Add Review
                     </button>
-                  </div></>) :(<><div className="sm:flex-col1 mt-8 flex w-full">
+                  </div></>) :(<>
+                  
+              <div className="sm:flex-col1 mt-8 flex w-full">
                     <button
                       onClick={() => setOpen(open ? false : true)}
                       type="submit"
                       disabled
-                      className="flex w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
+                      className="flex h-10 w-full flex-1 items-center justify-center rounded-md border border-transparent bg-gray-600 px-8 py-2 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
                     >
                       Please Login To Add Review
                     </button>
@@ -500,7 +508,7 @@ getUniqueRating.isLoading || getUniqueRating.isFetching ?
 
             {getUniqueShoe.isLoading || getUniqueShoe.isFetching ?
 
-              (<section aria-labelledby="details-heading" className="mt-9">
+              (<section aria-labelledby="details-heading" className="mt-10">
                 <div role="status" className="w-full p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700">
                   <div className="flex items-center justify-between">
                     <div>
