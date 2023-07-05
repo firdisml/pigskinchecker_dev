@@ -29,7 +29,7 @@ export const shoeRouter = createTRPCRouter({
     getAllShoe: publicProcedure.query(({ ctx }) => {
         return ctx.prisma.shoe.findMany({
             skip: 0,
-            take: 5,
+            take: 4,
             include: {
                 model: {
                     include: {
