@@ -2,7 +2,7 @@ import { type Config } from "tailwindcss";
 
 export default {
   darkMode: 'class',
-  content: ["./src/**/*.{js,ts,jsx,tsx}"],
+  content: ["./src/**/*.{js,ts,jsx,tsx}","./node_modules/flowbite-react/**/*.js"],
   theme: {
     extend: {
       colors: {
@@ -25,6 +25,7 @@ export default {
   plugins: [
     require('@tailwindcss/typography'),
     require('@tailwindcss/forms'),
-    require('@tailwindcss/aspect-ratio')
+    require('@tailwindcss/aspect-ratio'),
+    require("flowbite/plugin")
   ],
 } satisfies Config;

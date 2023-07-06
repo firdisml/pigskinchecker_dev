@@ -67,7 +67,26 @@ export default function Home() {
 
   return (
     <>
+    <div className="bg-white">
 
+      <div className="max-w-7xl mx-auto px-4 pt-10 sm:px-6 sm:pt-10 lg:max-w-7xl lg:px-8">
+        {/* Details section */}
+
+          <div className="grid grid-cols-1 gap-y-8 lg:grid-cols-1 lg:gap-x-8">
+            <div>
+              <div className="w-full rounded-lg aspect-w-21 aspect-h-9  overflow-hidden">
+                <img
+                  src="https://images.unsplash.com/photo-1578044145290-8d40db4c0587?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1954&q=80"
+                  alt="Drawstring top with elastic loop closure and textured interior padding."
+                  className="w-full h-full object-center object-cover"
+                />
+              </div>
+            </div>
+          </div>
+
+      </div>
+      
+    </div>
       <div className="bg-white">
         <div className=" pt-8 sm:pb-1 lg:max-w-7xl lg:mx-auto lg:px-8">
           <div className="px-4 flex items-center justify-between sm:px-6 lg:px-0">
