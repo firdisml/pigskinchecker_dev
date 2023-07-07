@@ -91,7 +91,7 @@ export default function Home() {
       <div className="bg-white">
         <div className=" pt-8 sm:pb-1 lg:max-w-7xl lg:mx-auto lg:px-8">
           <div className="px-4 flex items-center justify-between sm:px-6 lg:px-0">
-            <h2 className="flex text-xl font-semibold text-gray-900">Trending<span className="ml-2 mt-1"><AiFillQuestionCircle/></span></h2>
+            <h2 className="flex text-xl font-semibold text-gray-900">Trending Now<span className="ml-2 mt-1"><AiFillQuestionCircle/></span></h2>
           </div>
 
           <div className="mt-8 relative">
