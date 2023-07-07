@@ -64,6 +64,7 @@ const products = [
 
 export default function Home() {
   const getAllShoe = api.shoe.getAllShoe.useQuery();
+  const getAllShoeTrending = api.shoe.getAllShoeTrending.useQuery();
 
   return (
     <>
@@ -90,7 +91,7 @@ export default function Home() {
       <div className="bg-white">
         <div className=" pt-8 sm:pb-1 lg:max-w-7xl lg:mx-auto lg:px-8">
           <div className="px-4 flex items-center justify-between sm:px-6 lg:px-0">
-            <h2 className="flex text-xl font-semibold text-gray-900">Random Picks<span className="ml-2 mt-1"><AiFillQuestionCircle/></span></h2>
+            <h2 className="flex text-xl font-semibold text-gray-900">Trending<span className="ml-2 mt-1"><AiFillQuestionCircle/></span></h2>
           </div>
 
           <div className="mt-8 relative">
@@ -168,7 +169,7 @@ export default function Home() {
                       </div>
                     </div>
                   </li>
-                </>) : (<>{getAllShoe?.data?.map((product) => (
+                </>) : (<>{getAllShoeTrending?.data?.map((product) => (
                   <li key={product.id} className="w-64 inline-flex flex-col text-center lg:w-auto">
                     <div className="group relative">
                       <div className="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
