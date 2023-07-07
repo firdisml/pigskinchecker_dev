@@ -161,7 +161,7 @@ export default function PrimaryLayout(props: {
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
                                     <div className="pointer-events-auto w-screen max-w-xl">
                                         <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
-                                            <div className="pt-6 pl-6 pb-6 pr-2">
+                                            <div className="p-6">
                                                 <div className="flex items-center justify-between">
                                                     <input
                                                         type="text"
@@ -170,53 +170,17 @@ export default function PrimaryLayout(props: {
                                                         autoComplete="off"
                                                         onChange={(e) => set_search(e.target.value)}
                                                         value={search}
-                                                        className="h-12 block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="h-12 rounded-lg block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                         placeholder="Search"
                                                     />
 
-                                                    <div className="ml-3 flex h-12 items-center">
-                                                        <button
-                                                            type="button"
-                                                            className="rounded-md bg-white text-gray-400 hover:text-gray-500"
-                                                            onClick={() => setDash(false)}
-                                                        >
-                                                            <span className="sr-only">Close panel</span>
-                                                            <XIcon className="h-6 w-6" aria-hidden="true" />
-                                                        </button>
-                                                    </div>
+
                                                 </div>
                                             </div>
                                             {/*@ts-ignore*/}
-                                            {searchShoe?.data?.length > 0 && search.length > 0 ? (<><div className="group relative flex items-center py-5 border-t border-b px-5">
-                                                <a className="-m-1 block flex-1">
-                                                    <div className="flex">
-                                                        <div className="relative flex min-w-0 flex-1 items-center">
-                                                            <div className="ml-2 truncate">
-                                                                <p className="truncate text-sm font-medium text-gray-900">Search Result</p>
-                                                                <p className="truncate text-sm text-gray-500">{searchShoe?.data?.length} {searchShoe?.data?.length === 1 ? "Result" : "Results"}</p>
-                                                            </div>
-                                                        </div>
-                                                        <HiChevronRight className="h-6 w-6 my-auto" aria-hidden="true" />
-                                                    </div>
-                                                </a>
-                                            </div>
-                                            {/*@ts-ignore*/}
-                                            <div className="pl-6 font-semibold mt-5 text-gray-600">Top Results ({searchShoe?.data?.length < 10 ? searchShoe?.data?.length : 10})</div></>) : searchShoe?.data?.length === 0 && search.length > 0 ? <div className="group relative flex items-center py-5 border-t border-b px-5">
-                                                <a className="-m-1 block flex-1">
-                                                    <div className="flex">
-                                                        <div className="relative flex min-w-0 flex-1 items-center">
-                                                            <div className="ml-2 truncate">
-                                                                <p className="truncate text-sm font-medium text-gray-900">Search Result</p>
-                                                                <p className="truncate text-sm text-gray-500">0 Result</p>
-                                                            </div>
-                                                        </div>
-                                                        <HiChevronRight className="h-6 w-6 my-auto" aria-hidden="true" />
-                                                    </div>
-                                                </a>
-                                            </div> : null}
+                                           
 
-
-                                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 divide-y divide-gray-200 overflow-y-auto">
+                                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 overflow-y-auto">
                                                 {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
                                                     <li key={index}>
                                                         <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
@@ -224,7 +188,7 @@ export default function PrimaryLayout(props: {
                                                                 <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
                                                                 <div className="relative flex min-w-0 flex-1 items-center">
                                                                     <span className="relative inline-block flex-shrink-0">
-                                                                        <img className="h-10 w-12 " src={shoe?.pictures[0]} alt="" />
+                                                                        <img className="h-14 w-16 rounded-md" src={shoe?.pictures[0]} alt="" />
                                                                     </span>
                                                                     <div className="ml-5 truncate">
                                                                         {/*@ts-ignore*/}
