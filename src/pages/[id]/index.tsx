@@ -10,7 +10,8 @@ import { Dialog, Transition } from '@headlessui/react'
 import { ExclamationIcon } from '@heroicons/react/outline'
 import { signIn, signOut, useSession } from "next-auth/react";
 import { capitalCase } from "change-case";
-
+import { IoFootstepsOutline } from "react-icons/io5";
+import { AiOutlineExclamationCircle } from "react-icons/ai";
 
 const memoryOptions = [
   { name: 'Pigskin', inStock: true },
@@ -437,50 +438,50 @@ export default function Example() {
                 </span>
                 <div className="relative w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                   <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-                      <Dialog.Title as="h3" className="text-lg font-medium text-gray-900 mb-5">
-                        Add Review
-                      </Dialog.Title>
-                        <div>
-                          <div className="mb-5">
-                            <label className="text-md font-semibold text-gray-500">Review Status</label>
-                            <select
-                              id="tabs"
-                              name="tabs"
-                              className="block w-full text-sm rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-2"
-                              defaultValue={1}
-                              onChange={(e) => { set_review_status(Boolean(parseInt(e.currentTarget.value))) }}
-                            >
-                              <option value={1}>Agree</option>
-                              <option value={0}>Disagree</option>
-                            </select>
-                          </div>
+                    <Dialog.Title as="h3" className="text-lg font-medium text-gray-900 mb-5">
+                      Add Review
+                    </Dialog.Title>
+                    <div>
+                      <div className="mb-5">
+                        <label className="text-md font-semibold text-gray-500">Review Status</label>
+                        <select
+                          id="tabs"
+                          name="tabs"
+                          className="block w-full text-sm rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 mt-2"
+                          defaultValue={1}
+                          onChange={(e) => { set_review_status(Boolean(parseInt(e.currentTarget.value))) }}
+                        >
+                          <option value={1}>Agree</option>
+                          <option value={0}>Disagree</option>
+                        </select>
+                      </div>
 
-                          <div className="mb-5">
-                            <label className="text-md font-semibold text-gray-500">Review Title</label>
-                            <input
-                              type="email"
-                              name="email"
-                              id="email"
-                              className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
-                              placeholder="Review Title"
-                              onChange={(e) => set_title(e.currentTarget.value)}
-                              aria-describedby="email-optional"
-                            />
-                          </div>
-                        </div>
-                        <div>
-                          <label className="text-md font-semibold text-gray-500">Review Body</label>
-                          <textarea
-                            placeholder="Review Body"
-                            name="comment"
-                            id="comment"
-                            onChange={(e) => set_body(e.currentTarget.value)}
-                            className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
-                            defaultValue={''}
-                          />
-                        </div>
-                        <div>
-                        </div>
+                      <div className="mb-5">
+                        <label className="text-md font-semibold text-gray-500">Review Title</label>
+                        <input
+                          type="email"
+                          name="email"
+                          id="email"
+                          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
+                          placeholder="Review Title"
+                          onChange={(e) => set_title(e.currentTarget.value)}
+                          aria-describedby="email-optional"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-md font-semibold text-gray-500">Review Body</label>
+                      <textarea
+                        placeholder="Review Body"
+                        name="comment"
+                        id="comment"
+                        onChange={(e) => set_body(e.currentTarget.value)}
+                        className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
+                        defaultValue={''}
+                      />
+                    </div>
+                    <div>
+                    </div>
                   </div>
                   <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <button
@@ -725,7 +726,8 @@ export default function Example() {
                     <option key={tab.name}>{tab.name}</option>
                   ))}
                 </select>
-                {getAllRating?.data?.map((review, index) => (
+                {/*@ts-ignore*/}
+                {getAllRating?.data?.length > 0 ? (<>{getAllRating?.data?.map((review, index) => (
                   <div key={index} className="pt-8 lg:grid border-b pb-8 lg:grid-cols-12 lg:gap-x-8">
                     <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                       <div className="flex items-center xl:col-span-1">
@@ -759,7 +761,11 @@ export default function Example() {
                       </p>
                     </div>
                   </div>
-                ))}
+                ))}</>) : (<div className="flex my-10 items-center text-gray-600  justify-center">
+                <h1 className="mr-2">No Review Yet</h1>
+                <AiOutlineExclamationCircle className="h-5 w-5"/>
+              </div>)}
+
               </div>
 
               <div className="hidden sm:block">
@@ -789,7 +795,8 @@ export default function Example() {
                     ))}
                   </nav>
                 </div>
-                {getAllRating?.data?.map((review, index) => (
+                {/*@ts-ignore*/}
+                {getAllRating?.data?.length > 0 ? (<>{getAllRating?.data?.map((review, index) => (
                   <div key={index} className="pt-10 lg:grid border-b pb-10 lg:grid-cols-12 lg:gap-x-8">
                     <div className="lg:col-span-8 lg:col-start-5 xl:col-span-9 xl:col-start-4 xl:grid xl:grid-cols-3 xl:items-start xl:gap-x-8">
                       <div className="flex items-center xl:col-span-1">
@@ -824,7 +831,10 @@ export default function Example() {
                       </p>
                     </div>
                   </div>
-                ))}
+                ))}</>) : (<div className="flex my-10 items-center text-gray-600  justify-center">
+                <h1 className="mr-2">No Review Yet</h1>
+                <AiOutlineExclamationCircle className="h-5 w-5"/>
+              </div>)}
 
               </div>
             </div>
