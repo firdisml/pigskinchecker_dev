@@ -40,6 +40,25 @@ export const shoeRouter = createTRPCRouter({
         })
     }),
 
+    getAllShoeTrending: publicProcedure.query(({ ctx }) => {
+        return ctx.prisma.shoe.findMany({
+            skip: 0, 
+            take: 4,
+            orderBy: {
+                ratings: {
+                    _count: "desc"
+                }
+            },
+            include: {
+                model: {
+                    include: {
+                        brand:true
+                    }
+                }
+            }
+        })
+    }),
+
     addRating: protectedProcedure
         .input(z.object({ userId: z.string(), shoeUniqueName: z.string(), title: z.string(), body: z.string(), status: z.boolean() }))
         .mutation(({ input, ctx }) => {
