@@ -462,6 +462,7 @@ export default function Example() {
                           type="email"
                           name="email"
                           id="email"
+                          required
                           className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
                           placeholder="Review Title"
                           onChange={(e) => set_title(e.currentTarget.value)}
@@ -475,6 +476,7 @@ export default function Example() {
                         placeholder="Review Body"
                         name="comment"
                         id="comment"
+                        required
                         onChange={(e) => set_body(e.currentTarget.value)}
                         className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md mt-2"
                         defaultValue={''}
