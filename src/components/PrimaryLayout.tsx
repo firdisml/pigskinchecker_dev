@@ -188,12 +188,18 @@ export default function PrimaryLayout(props: {
                                                                 <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
                                                                 <div className="relative flex min-w-0 flex-1 items-center">
                                                                     <span className="relative inline-block flex-shrink-0">
-                                                                        <img className="h-14 w-16 rounded-md" src={shoe?.pictures[0]} alt="" />
+                                                                        <img className="h-16 w-16 rounded-md" src={shoe?.pictures[0]} alt="" />
                                                                     </span>
                                                                     <div className="ml-5 truncate">
                                                                         {/*@ts-ignore*/}
                                                                         <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
-                                                                        <p className="truncate text-sm text-gray-500">{shoe.color}</p>
+                                                                        <p className="truncate text-xs text-gray-500">{shoe.color}</p>
+                                                                        <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-normal text-indigo-800 mt-1">
+                          <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                            <circle cx={4} cy={4} r={3} />
+                          </svg>
+                          {shoe?.status ? "Contains Pigskin" : "No Pigskin"}
+                        </span>
                                                                     </div>
                                                                 </div>
                                                             </a>
