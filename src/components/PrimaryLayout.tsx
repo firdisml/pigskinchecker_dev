@@ -146,7 +146,7 @@ export default function PrimaryLayout(props: {
                                     </div>
                                     <div className="-mr-2 flex md:hidden">
                                         {/* Mobile menu button */}
-                                        <button onClick={() => setOpen(true)} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
+                                        <button ref={btnRef} onClick={onOpen} className="flex text-gray-600 dark:text-white bg-transparent hover:bg-opacity-75 px-3 py-2 rounded-md text-sm font-semibold">
                                             <HiSearch className="h-6 w-6 mr-5" aria-hidden="true" />
                                         </button>
 
