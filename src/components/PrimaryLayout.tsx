@@ -100,7 +100,7 @@ export default function PrimaryLayout(props: {
 
 
     if (!mounted) return <></>;
-    function preventScroll(e){
+    function preventScroll(e:any){
         e.preventDefault();
         e.stopPropagation();
     
@@ -122,7 +122,7 @@ export default function PrimaryLayout(props: {
 
     return (
         <>
-            <div className="min-h-full" id="scrollable">
+            <div className="min-h-full">
                 <Disclosure as="nav" className="bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700">
                     {({ open }) => (
                         <>
@@ -217,12 +217,12 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setDash}>
+      <Dialog as="div" className="relative z-10" id="scrollable" onClose={setDash}>
         <div className="fixed inset-0" />
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -420,7 +420,7 @@ export default function PrimaryLayout(props: {
         </div>
       </Dialog>
     </Transition.Root>
-                <main className="z-0">
+                <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
                     </div>
