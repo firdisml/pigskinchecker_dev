@@ -160,7 +160,7 @@ export default function PrimaryLayout(props: {
                             <Dialog.Overlay className="absolute inset-0 bg-black opacity-60" />
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
                                     <div className="pointer-events-auto w-screen max-w-xl">
-                                        <div className="flex h-screen flex-col overflow-y-scroll overscroll-y-none bg-white shadow-xl">
+                                        <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl">
                                             <div className="p-6">
                                                 <div className="flex items-center justify-between">
                                                     <input
@@ -173,7 +173,7 @@ export default function PrimaryLayout(props: {
                                                     
                                                         onChange={(e) => set_search(e.target.value)}
                                                         value={search}
-                                                        className="h-12 rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="h-12 focus:ovescroll-none rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                         placeholder="Search"
                                                     />
 
