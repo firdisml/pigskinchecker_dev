@@ -208,69 +208,67 @@ export default function PrimaryLayout(props: {
                         </>
                     )}
                 </Disclosure>
-                <Transition.Root show={dash} as={Fragment}>
-      <Dialog as="div" className="fixed inset-0 overflow-hidden" onClose={setDash}>
-        <div className="absolute inset-0 overflow-hidden">
-          <Transition.Child
-            as={Fragment}
-            enter="ease-in-out duration-500"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in-out duration-500"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <Dialog.Overlay className="absolute inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
-          </Transition.Child>
 
-          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-            <Transition.Child
-              as={Fragment}
-              enter="transform transition ease-in-out duration-500 sm:duration-700"
-              enterFrom="translate-x-full"
-              enterTo="translate-x-0"
-              leave="transform transition ease-in-out duration-500 sm:duration-700"
-              leaveFrom="translate-x-0"
-              leaveTo="translate-x-full"
-            >
+
+      <Dialog open={dash} className="fixed inset-0 overflow-hidden" onClose={setDash}>
+        <div className="absolute inset-0 overflow-hidden">
+          <Dialog.Overlay className="absolute inset-0" />
+
+          <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
               <div className="pointer-events-auto w-screen max-w-md">
-                <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
-                  <div className="px-4 sm:px-6">
-                    <div className="flex items-start justify-between">
-                      <Dialog.Title className="text-lg font-medium text-gray-900"> Panel title </Dialog.Title>
-                      <div className="ml-3 flex h-7 items-center">
-                        <button
-                          type="button"
-                          className="rounded-md bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                          onClick={() => setDash(false)}
-                        >
-                          <span className="sr-only">Close panel</span>
-                          <XIcon className="h-6 w-6" aria-hidden="true" />
-                        </button>
+                <form className="flex h-screen flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                  <div className="h-0 flex-1 overflow-y-auto">
+                    <div className="bg-indigo-700 py-6 px-4 sm:px-6">
+                      <div className="flex items-center justify-between">
+                        <Dialog.Title className="text-lg font-medium text-white"> New Project </Dialog.Title>
+                        <div className="ml-3 flex h-7 items-center">
+                          <button
+                            type="button"
+                            className="rounded-md bg-indigo-700 text-indigo-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-white"
+                            onClick={() => setDash(false)}
+                          >
+                            <span className="sr-only">Close panel</span>
+                            <XIcon className="h-6 w-6" aria-hidden="true" />
+                          </button>
+                        </div>
+                      </div>
+                      <div className="mt-1">
+                        <p className="text-sm text-indigo-300">
+                          Get started by filling in the information below to create your new project.
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex flex-1 flex-col justify-between">
+                      <div className="divide-y divide-gray-200 px-4 sm:px-6">
+                        <div className="space-y-6 pt-6 pb-5">
+                          <div>
+                            <label htmlFor="project-name" className="block text-sm font-medium text-gray-900">
+                              {' '}
+                              Project name{' '}
+                            </label>
+                            <div className="mt-1">
+                              <input
+                                type="text"
+                                name="project-name"
+                                id="project-name"
+                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                              />
+                            </div>
+                          </div>
+                         
+                          
+                       
+                        </div>
+                        
                       </div>
                     </div>
                   </div>
-                  <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                    {/* Replace with your content */}
-                    <div className="absolute inset-0 px-4 sm:px-6">
-                    <input
-            type="text"
-            name="price"
-            id="price"
-            className="h-12 block w-full bg-white dark:bg-gray-900 text-black dark:text-white rounded-2xl border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-            placeholder="Search"
-          />
-                    </div>
-                    {/* /End replace */}
-                  </div>
-                </div>
+                  
+                </form>
               </div>
-            </Transition.Child>
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
-
                 <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
