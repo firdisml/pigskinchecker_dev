@@ -217,7 +217,7 @@ export default function PrimaryLayout(props: {
 
 
 
-      <Dialog as="div" open={dash} className="relative z-50" id="scrollable" onClose={setDash}>
+      <Dialog as="div" open={dash} className="fixed z-50" id="scrollable" onClose={setDash}>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
         <div className="fixed inset-0 overflow-hidden">
