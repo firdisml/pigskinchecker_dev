@@ -23,8 +23,8 @@ import { XIcon } from '@heroicons/react/outline'
 import { useDebounce } from "use-debounce";
 import { Orbitron } from '@next/font/google'
 const orbitron = Orbitron({
-  subsets: ['latin'],
-  weight: ['900']
+    subsets: ['latin'],
+    weight: ['900']
 })
 
 const tabs = [
@@ -60,24 +60,24 @@ export default function PrimaryLayout(props: {
 
     useEffect(() => { setMounted(true) }, []);
 
-    
+
 
     if (!mounted) return <></>;
 
-        //@ts-ignore
-        const numberInputOnWheelPreventChange = (e) => {
-          // Prevent the input value change
-          e.target.blur()
-      
-          // Prevent the page/container scrolling
-          e.stopPropagation()
-      
+    //@ts-ignore
+    const numberInputOnWheelPreventChange = (e) => {
+        // Prevent the input value change
+        e.target.blur()
 
-            setTimeout(() => {
-              e.target.focus()
-          }, 0)
-      }
- 
+        // Prevent the page/container scrolling
+        e.stopPropagation()
+
+
+        setTimeout(() => {
+            e.target.focus()
+        }, 0)
+    }
+
     return (
         <>
             <div className="min-h-full">
@@ -89,8 +89,8 @@ export default function PrimaryLayout(props: {
                                     <div className="items-center">
                                         <div className="flex flex-shrink-0">
                                             <Link href="/" className="text-gray-600 font-bold dark:text-white mb-1.5 lg:text-3xl">
-                                                <h1  className={orbitron.className} ><a className="tracking-wider text-xl">SOLEBITE</a></h1>
-            
+                                                <h1 className={orbitron.className} ><a className="tracking-wider text-xl">SOLEBITE</a></h1>
+
                                             </Link>
 
                                         </div>
@@ -171,64 +171,70 @@ export default function PrimaryLayout(props: {
                         </>
                     )}
                 </Disclosure>
+                    <Dialog open={dash} className="relative z-10" onClose={setDash}>
+                        <div className="fixed inset-0" />
 
-                    <Dialog open={dash} as={Fragment} onClose={setDash}>
-                        <div className="absolute inset-0 overflow-hidden">
-                            <Dialog.Overlay className="absolute inset-0 bg-black opacity-60" />
-                            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-                                    <div className="pointer-events-auto w-screen max-w-xl">
-                                        <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl">
-                                            <div className="p-6">
-                                                <div className="items-center justify-between">
-                                                    <input
-                                                        type="form"
-                                                        name="search"
-                                                        
-                                                        id="search"
-                                                        autoComplete="off"
-                                                        onWheel={numberInputOnWheelPreventChange}
-                                                        onChange={(e) => set_search(e.target.value)}
-                                                        value={search}
-                                                        className="h-12 rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                        placeholder="Search"
-                                                    />
-                                                </div>
-                                            </div>
-                                            {/*@ts-ignore*/}
-                                           
-
-                                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 overflow-y-auto">
-                                                {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
-                                                    <li key={index}>
-                                                        <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
-                                                            <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
-                                                                <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
-                                                                <div className="relative flex min-w-0 flex-1 items-center">
-                                                                    <span className="relative inline-block flex-shrink-0">
-                                                                        <img className="h-16 w-16 rounded-md" src={shoe?.pictures[0]} alt="" />
-                                                                    </span>
-                                                                    <div className="ml-5 truncate">
-                                                                        {/*@ts-ignore*/}
-                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
-                                                                        <p className="truncate text-xs text-gray-500">{shoe.color}</p>
-                                                                        <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-normal text-indigo-800 mt-1">
-                          <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                            <circle cx={4} cy={4} r={3} />
-                          </svg>
-                          {shoe?.status ? "Contains Pigskin" : "No Pigskin"}
-                        </span>
-                                                                    </div>
-                                                                </div>
-                                                            </a>
+                        <div className="fixed inset-0 overflow-hidden">
+                            <div className="absolute inset-0 overflow-hidden">
+                                <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+                                        <Dialog.Panel className="pointer-events-auto w-screen bg-black max-w-2xl">
+                                            <form className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
+                                                <div className="flex-1">
+                                                    {/* Divider container */}
+                                                    <div className="space-y-6 py-6 sm:space-y-0 sm:divide-y sm:divide-gray-200 sm:py-0">
+                                                        {/* Project name */}
+                                                        <div className="space-y-1 px-4 sm:grid sm:grid-cols-1 sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
+                                                            <div className="sm:col-span-2">
+                                                                <input
+                                                                    type="text"
+                                                                    name="project-name"
+                                                                    id="project-name"
+                                                                    onChange={(e) => set_search(e.target.value)}
+                                                                    className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                                />
+                                                            </div>
                                                         </div>
-                                                    </li>
-                                                ))}
-                                            </ul> : null}
-                                        </div>
-                                    </div>
+
+                                                        {/* Project description */}
+                                                        <div className="space-y-1 w-full px-4 sm:grid sm:grid-cols-1 sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
+                                                        {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 overflow-y-auto">
+                                        {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
+                                            <li key={index}>
+                                                <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
+                                                    <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
+                                                        <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
+                                                        <div className="relative flex min-w-0 flex-1 items-center">
+                                                            <span className="relative inline-block flex-shrink-0">
+                                                                <img className="h-16 w-16 rounded-md" src={shoe?.pictures[0]} alt="" />
+                                                            </span>
+                                                            <div className="ml-5 truncate">
+                                                                {/*@ts-ignore*/}
+                                                                <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
+                                                                <p className="truncate text-xs text-gray-500">{shoe.color}</p>
+                                                                <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-normal text-indigo-800 mt-1">
+                                                                    <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                                                                        <circle cx={4} cy={4} r={3} />
+                                                                    </svg>
+                                                                    {shoe?.status ? "Contains Pigskin" : "No Pigskin"}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul> : null}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </Dialog.Panel>
+
+                                </div>
                             </div>
                         </div>
                     </Dialog>
+  
                 <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
