@@ -157,7 +157,7 @@ export default function PrimaryLayout(props: {
 
                     <Dialog open={dash} as={Fragment} onClose={setDash}>
                         <div className="absolute inset-0 overflow-hidden">
-                            <Dialog.Overlay className="absolute h-screen inset-0 bg-black opacity-60" />
+                            <Dialog.Overlay className="absolute inset-0 bg-black opacity-60" />
                             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
                                     <div className="pointer-events-auto w-screen max-w-xl">
                                         <div className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
@@ -167,11 +167,10 @@ export default function PrimaryLayout(props: {
                                                         type="text"
                                                         name="price"
                                                         id="price"
-                                                        autoFocus={false}
                                                         autoComplete="off"
                                                         onChange={(e) => set_search(e.target.value)}
                                                         value={search}
-                                                        className="h-12 rounded-lg block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="h-12 rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                         placeholder="Search"
                                                     />
 
