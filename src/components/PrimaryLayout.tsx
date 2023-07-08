@@ -166,11 +166,12 @@ export default function PrimaryLayout(props: {
                                                     <input
                                                         type="text"
                                                         name="price"
+                                                        onFocus={(e) => e.preventDefault()}
                                                         id="price"
                                                         autoComplete="off"
                                                         onChange={(e) => set_search(e.target.value)}
                                                         value={search}
-                                                        className="h-12 rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="h-12 -right-99999999px rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                         placeholder="Search"
                                                     />
 
