@@ -234,40 +234,48 @@ export default function PrimaryLayout(props: {
                                     >
                                         <Dialog.Panel className="pointer-events-auto w-screen max-w-lg">
                                             <form className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
-                                                <div className="h-0 flex-1 overflow-y-auto">
-                                                    <div className="flex flex-1 flex-col justify-between">
-                                                        <div className="divide-y divide-gray-200 px-4 sm:px-6">
-                                                            <div className="space-y-6 pt-6 pb-5">
-                                                                <div>
-                                                                    <label htmlFor="project-name" className="block text-sm font-medium text-gray-900">
-                                                                        Project name
-                                                                    </label>
+                                            <div className="flex flex-col flex-shrink-0 justify-start px-4 py-4">
+
                                                                     <div className="mt-1">
                                                                         <input
                                                                             type="text"
                                                                             name="project-name"
                                                                             id="project-name"
                                                                             autoComplete="off"
+                                                                            autoFocus = {false}
+                                                                            placeholder="Search"
                                                                             onChange={(e) => set_search(e.target.value)}
                                                                             value={search}
                                                                             className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                         />
                                                                     </div>
                                                                 </div>
+                                                <div className="h-0 flex-1 overflow-y-auto">
+                                                    <div className="flex flex-1 flex-col justify-between">
+                                                        <div className="divide-y divide-gray-200 px-4 sm:px-6">
+                                                            <div className="space-y-6">
+                                                                
                                                                 {search_debounced?.length > 0 ? <ul role="list" className="flex-1">
                                                                     {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
+                                                                        
                                                                         <li key={index}>
-                                                                            <div className="group relative flex items-center py-6 cursor-pointer border-b">
+                                                                            <div className={index + 1 === searchShoe?.data?.length ? "group relative flex items-center py-6 cursor-pointer" : "group relative flex items-center py-6 cursor-pointer border-b"}>
                                                                                 <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
                                                                                     <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
                                                                                     <div className="relative flex min-w-0 flex-1 items-center">
                                                                                         <span className="relative inline-block flex-shrink-0">
                                                                                             <img className="h-16 w-19 rounded-lg" src={shoe?.pictures[0]} alt="" />
                                                                                         </span>
-                                                                                        <div className="ml-5 truncate">
+                                                                                        <div className="ml-5 pb-1 truncate">
                                                                                             {/*@ts-ignore*/}
                                                                                             <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
-                                                                                            <p className="truncate text-sm text-gray-500">{shoe.color}</p>
+                                                                                            <p className="truncate text-xs text-gray-500">{shoe.color}</p>
+                                                                        <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-normal text-indigo-800 mt-1">
+                          <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
+                            <circle cx={4} cy={4} r={3} />
+                          </svg>
+                          {shoe?.status ? "Contains Pigskin" : "No Pigskin"}
+                        </span>
                                                                                         </div>
                                                                                     </div>
                                                                                 </a>
