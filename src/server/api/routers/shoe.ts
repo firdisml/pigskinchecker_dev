@@ -40,6 +40,23 @@ export const shoeRouter = createTRPCRouter({
         })
     }),
 
+    getAllShoeNewly: publicProcedure.query(({ ctx }) => {
+        return ctx.prisma.shoe.findMany({
+            skip: 0,
+            take: 4,
+            orderBy:{
+                createdAt: "desc"
+            },
+            include: {
+                model: {
+                    include: {
+                        brand:true
+                    }
+                }
+            }
+        })
+    }),
+
     getAllShoeTrending: publicProcedure.query(({ ctx }) => {
         return ctx.prisma.shoe.findMany({
             skip: 0, 

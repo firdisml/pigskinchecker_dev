@@ -4,20 +4,25 @@ const prisma = new PrismaClient()
 
 async function main() {
     const seed = await prisma.shoe.update({
-        where: {
-            uniqueName: "adidas-samba-decon-core-black-cloud-white-gum",
+        where:{
+            uniqueName: "adidas-samba-og-cloud-white-green-gum",
         },
         data: {
-            name: "Samba Decon",
-            uniqueName: "adidas-samba-decon-core-black-cloud-white-gum",
-            searchParameter: "adidassambadeconcoreblackcloudwhitegumhqif0641",
-            sku: "IF0641",
-            color: "Core Black / Core White / Gum",
-            pictures: ["https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/883a6bdaeb7b4e708219afd2010a0f52_9366/Samba_Decon_Shoes_Black_IF0641_01_standard.jpg", "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/14e2932de63546a19018afd2010a4cb6_9366/Samba_Decon_Shoes_Black_IF0641_41_detail.jpg", "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/5d47116a679c434285eaafd2010a553d_9366/Samba_Decon_Shoes_Black_IF0641_42_detail.jpg", "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/0cd0b30cdaca4746b624afd2010a41bd_9366/Samba_Decon_Shoes_Black_IF0641_05_standard.jpg"],
-            features: ["Regular fit", "Lace closure", "Leather upper", "Leather lining", "Rubber outsole"],
-            sources: ["https://www.adidas.com.my/en/samba-decon-shoes/IF0641.html"],
-            sizing: ["Regular Fit"],
-            description: "The adidas Samba shoes take on a deconstructed aesthetic without missing a beat in style. These shoes reflect a rich legacy with their timeless design. From the feet of football athletes to the high-fashion runways, the adidas Samba shoes embody self-expression and effortless style.",
+            name: "Samba OG",
+            uniqueName: "adidas-samba-og-cloud-white-green-gum",
+            searchParameter: "adidassambacloudwhitegreengumig1024",
+            sku: "IG1024",
+            color: "Cloud White / Green / Gum",
+            pictures: 
+            [
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a34f007a106043afb2f3afab00e997ee_9366/Samba_OG_Shoes_White_IG1024_01_standard.jpg", 
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2c3acb92f2c24b55bad4afab00e9e657_9366/Samba_OG_Shoes_White_IG1024_41_detail.jpg",
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/17d2d6e1484d4a048281afab00e9f075_9366/Samba_OG_Shoes_White_IG1024_42_detail.jpg", 
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/23f5da5b3a8a4df5ba14afab00e9da6e_9366/Samba_OG_Shoes_White_IG1024_05_standard.jpg"],
+            features: ["Regular fit", "Lace closure", "Full grain leather", "Synthetic leather lining", "Gum rubber midsole"],
+            sources: ["https://www.adidas.com/us/samba-og-shoes/IG1024.html"],
+            sizing: ["Regular fit"],
+            description: "Born on the soccer field, the Samba is a timeless icon of street style. These shoes stay true to their legacy with a soft leather upper and suede overlays.",
             modelId: "cljseu0ps0001v4fgdhrbm5k2",
             status: false
         }
