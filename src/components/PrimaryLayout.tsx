@@ -251,7 +251,7 @@ export default function PrimaryLayout(props: {
                                 type="text"
                                 name="project-name"
                                 id="project-name"
-                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                className="block z-50 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                               />
                             </div>
                           </div>
