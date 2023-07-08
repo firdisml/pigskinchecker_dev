@@ -100,7 +100,12 @@ export default function PrimaryLayout(props: {
 
 
     if (!mounted) return <></>;
-
+    function preventScroll(e:any){
+        e.preventDefault();
+        e.stopPropagation();
+    
+        return false;
+    }
     //@ts-ignore
     const numberInputOnWheelPreventChange = (e) => {
         // Prevent the input value change
@@ -212,12 +217,12 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-      <Dialog as="div" className="relative z-10" onClose={setDash}>
+      <Dialog as="div" className="relative z-10" id="scrollable" onClose={setDash}>
         <div className="fixed inset-0" />
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
+            <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
               <Transition.Child
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -261,7 +266,7 @@ export default function PrimaryLayout(props: {
                                 <input
                                   type="text"
                                   name="project-name"
-                                  onFocus={(e) => e.stopPropagation()}
+                                  onFocus={(e) => document?.querySelector('#scrollable')?.addEventListener('wheel', preventScroll)}
                                   id="project-name"
                                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
@@ -415,7 +420,7 @@ export default function PrimaryLayout(props: {
         </div>
       </Dialog>
     </Transition.Root>
-                <main className="z-0">
+                <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
                     </div>
