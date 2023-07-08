@@ -4,10 +4,9 @@ import { type AppType } from "next/app";
 import { api } from "~/utils/api";
 import "~/styles/globals.css";
 import PrimaryLayout from "~/components/PrimaryLayout";
-import { ThemeProvider } from 'next-themes';
 import { IBM_Plex_Sans } from '@next/font/google'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
-
+import { ChakraProvider } from '@chakra-ui/react'
 const ibmplexsans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400']
@@ -17,7 +16,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <ThemeProvider defaultTheme='light' enableSystem={true} attribute='class'>
+    <ChakraProvider>
       <SessionProvider session={session}>
         <main className={ibmplexsans.className}>
           <PrimaryLayout>
@@ -26,7 +25,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
           </PrimaryLayout>
         </main>
       </SessionProvider>
-    </ThemeProvider>
+    </ChakraProvider>
+
   );
 };
 
