@@ -171,13 +171,23 @@ export default function PrimaryLayout(props: {
                         </>
                     )}
                 </Disclosure>
-                    <Dialog open={dash} className="relative z-10" onClose={setDash}>
+                <Transition.Root show={dash} as={Fragment}>
+                    <Dialog as="div" className="relative z-10" onClose={setDash}>
                         <div className="fixed inset-0" />
 
                         <div className="fixed inset-0 overflow-hidden">
                             <div className="absolute inset-0 overflow-hidden">
                                 <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
-                                        <Dialog.Panel className="pointer-events-auto w-screen bg-black max-w-2xl">
+                                    <Transition.Child
+                                        as={Fragment}
+                                        enter="transform transition ease-in-out duration-500 sm:duration-700"
+                                        enterFrom="translate-x-full"
+                                        enterTo="translate-x-0"
+                                        leave="transform transition ease-in-out duration-500 sm:duration-700"
+                                        leaveFrom="translate-x-0"
+                                        leaveTo="translate-x-full"
+                                    >
+                                        <Dialog.Panel className="pointer-events-auto w-screen max-w-2xl">
                                             <form className="flex h-full flex-col overflow-y-scroll bg-white shadow-xl">
                                                 <div className="flex-1">
                                                     {/* Divider container */}
@@ -189,52 +199,22 @@ export default function PrimaryLayout(props: {
                                                                     type="text"
                                                                     name="project-name"
                                                                     id="project-name"
-                                                                    onChange={(e) => set_search(e.target.value)}
                                                                     className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                                 />
                                                             </div>
                                                         </div>
 
-                                                        {/* Project description */}
-                                                        <div className="space-y-1 w-full px-4 sm:grid sm:grid-cols-1 sm:gap-4 sm:space-y-0 sm:px-6 sm:py-5">
-                                                        {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 overflow-y-auto">
-                                        {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
-                                            <li key={index}>
-                                                <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
-                                                    <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
-                                                        <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
-                                                        <div className="relative flex min-w-0 flex-1 items-center">
-                                                            <span className="relative inline-block flex-shrink-0">
-                                                                <img className="h-16 w-16 rounded-md" src={shoe?.pictures[0]} alt="" />
-                                                            </span>
-                                                            <div className="ml-5 truncate">
-                                                                {/*@ts-ignore*/}
-                                                                <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
-                                                                <p className="truncate text-xs text-gray-500">{shoe.color}</p>
-                                                                <span className="inline-flex items-center rounded-full bg-indigo-100 px-3 py-0.5 text-xs font-normal text-indigo-800 mt-1">
-                                                                    <svg className="-ml-1 mr-1.5 h-2 w-2 text-indigo-400" fill="currentColor" viewBox="0 0 8 8">
-                                                                        <circle cx={4} cy={4} r={3} />
-                                                                    </svg>
-                                                                    {shoe?.status ? "Contains Pigskin" : "No Pigskin"}
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </a>
-                                                </div>
-                                            </li>
-                                        ))}
-                                    </ul> : null}
-                                                        </div>
+                                                    
                                                     </div>
                                                 </div>
                                             </form>
                                         </Dialog.Panel>
-
+                                    </Transition.Child>
                                 </div>
                             </div>
                         </div>
                     </Dialog>
-  
+                </Transition.Root>
                 <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
