@@ -261,6 +261,7 @@ export default function PrimaryLayout(props: {
                                 <input
                                   type="text"
                                   name="project-name"
+                                  onFocus={(e) => e.stopPropagation()}
                                   id="project-name"
                                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
