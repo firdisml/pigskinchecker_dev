@@ -60,7 +60,24 @@ export default function PrimaryLayout(props: {
 
     useEffect(() => { setMounted(true) }, []);
 
+    
+
     if (!mounted) return <></>;
+
+        //@ts-ignore
+        const numberInputOnWheelPreventChange = (e) => {
+          // Prevent the input value change
+          e.target.blur()
+      
+          // Prevent the page/container scrolling
+          e.stopPropagation()
+      
+
+            setTimeout(() => {
+              e.target.focus()
+          }, 0)
+      }
+ 
     return (
         <>
             <div className="min-h-full">
@@ -162,20 +179,19 @@ export default function PrimaryLayout(props: {
                                     <div className="pointer-events-auto w-screen max-w-xl">
                                         <div className="flex h-screen flex-col overflow-y-scroll bg-white shadow-xl">
                                             <div className="p-6">
-                                                <div className="flex items-center justify-between">
+                                                <div className="items-center justify-between">
                                                     <input
                                                         type="form"
                                                         name="search"
                                                         
                                                         id="search"
                                                         autoComplete="off"
-                                                    
+                                                        onWheel={numberInputOnWheelPreventChange}
                                                         onChange={(e) => set_search(e.target.value)}
                                                         value={search}
-                                                        className="h-12 focus:ovescroll-none rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="h-12 rounded-lg overflow-hidden block w-full bg-white dark:bg-gray-900 text-black dark:text-white border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                         placeholder="Search"
                                                     />
-
                                                 </div>
                                             </div>
                                             {/*@ts-ignore*/}
