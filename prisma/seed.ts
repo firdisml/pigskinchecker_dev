@@ -3,27 +3,24 @@ import { PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
 async function main() {
-    const seed = await prisma.shoe.update({
-        where:{
-            uniqueName: "adidas-samba-og-cloud-white-green-gum",
-        },
+    const seed = await prisma.shoe.create({
         data: {
-            name: "Samba OG",
-            uniqueName: "adidas-samba-og-cloud-white-green-gum",
-            searchParameter: "adidassambacloudwhitegreengumig1024",
-            sku: "IG1024",
-            color: "Cloud White / Green / Gum",
+            name: "Tobacco Gruen",
+            uniqueName: "adidas-tobacco-gruen-silver-green-ash-silver-aluminas",
+            searchParameter: "adidastobaccogruensilvergreenashsilveraluminasgy7397",
+            sku: "GY7397",
+            color: "Silver Green / Ash Silver / Aluminas",
             pictures: 
             [
-                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/a34f007a106043afb2f3afab00e997ee_9366/Samba_OG_Shoes_White_IG1024_01_standard.jpg", 
-                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2c3acb92f2c24b55bad4afab00e9e657_9366/Samba_OG_Shoes_White_IG1024_41_detail.jpg",
-                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/17d2d6e1484d4a048281afab00e9f075_9366/Samba_OG_Shoes_White_IG1024_42_detail.jpg", 
-                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/23f5da5b3a8a4df5ba14afab00e9da6e_9366/Samba_OG_Shoes_White_IG1024_05_standard.jpg"],
-            features: ["Regular fit", "Lace closure", "Full grain leather", "Synthetic leather lining", "Gum rubber midsole"],
-            sources: ["https://www.adidas.com/us/samba-og-shoes/IG1024.html"],
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/547c6ce439b546a9aae1af7b00932090_9366/Tobacco_Shoes_Green_GY7397_01_standard.jpg", 
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/00c7cd95c34e4a318d19af7b009353bb_9366/Tobacco_Shoes_Green_GY7397_41_detail.jpg",
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/fe3e4dee86604297963eaf7b00935d9f_9366/Tobacco_Shoes_Green_GY7397_42_detail.jpg", 
+                "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/7f5890a26a664a508089af7b00934a91_9366/Tobacco_Shoes_Green_GY7397_05_standard.jpg"],
+            features: ["Lace closure", "Synthetic suede upper", "Textile lining", "Rubber outsole"],
+            sources: ["https://www.adidas.co.uk/tobacco-shoes/GY7397.html"],
             sizing: ["Regular fit"],
-            description: "Born on the soccer field, the Samba is a timeless icon of street style. These shoes stay true to their legacy with a soft leather upper and suede overlays.",
-            modelId: "cljseu0ps0001v4fgdhrbm5k2",
+            description: 'The adidas Tobacco Gruen Shoes tap into elemental energy with wind, earth, and fire inspiration. Faux suede upper ensures a luxurious touch. Gruen, meaning "green" in German, signifies the eco-friendly upgrade with recycled materials.',
+            modelId: "cljtk7fk90001y19bbydf4r4c",
             status: false
         }
     }) 
