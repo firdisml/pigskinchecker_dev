@@ -216,7 +216,7 @@ export default function PrimaryLayout(props: {
 
           <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10 sm:pl-16">
               <div className="pointer-events-auto w-screen max-w-md">
-                <form className="flex h-screen flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                <form className="flex h-screen overflow-scroll flex-col divide-y divide-gray-200 bg-white shadow-xl">
                   <div className="h-0 flex-1 overflow-y-auto">
                     <div className="bg-indigo-700 py-6 px-4 sm:px-6">
                       <div className="flex items-center justify-between">
