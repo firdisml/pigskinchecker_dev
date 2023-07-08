@@ -100,7 +100,12 @@ export default function PrimaryLayout(props: {
 
 
     if (!mounted) return <></>;
-
+    function preventScroll(e){
+        e.preventDefault();
+        e.stopPropagation();
+    
+        return false;
+    }
     //@ts-ignore
     const numberInputOnWheelPreventChange = (e) => {
         // Prevent the input value change
@@ -117,7 +122,7 @@ export default function PrimaryLayout(props: {
 
     return (
         <>
-            <div className="min-h-full">
+            <div className="min-h-full" id="scrollable">
                 <Disclosure as="nav" className="bg-white dark:bg-gray-900 border-b border-gray-300 dark:border-gray-700">
                     {({ open }) => (
                         <>
@@ -261,7 +266,7 @@ export default function PrimaryLayout(props: {
                                 <input
                                   type="text"
                                   name="project-name"
-                                  onFocus={(e) => e.stopPropagation()}
+                                  onFocus={(e) => document?.querySelector('#scrollable')?.addEventListener('wheel', preventScroll)}
                                   id="project-name"
                                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
