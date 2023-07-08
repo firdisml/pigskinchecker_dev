@@ -253,7 +253,13 @@ export default function PrimaryLayout(props: {
                   <div className="relative mt-6 flex-1 px-4 sm:px-6">
                     {/* Replace with your content */}
                     <div className="absolute inset-0 px-4 sm:px-6">
-                      <div className="h-full border-2 border-dashed border-gray-200" aria-hidden="true" />
+                    <input
+            type="text"
+            name="price"
+            id="price"
+            className="h-12 block w-full bg-white dark:bg-gray-900 text-black dark:text-white rounded-2xl border placeholder-black dark:placeholder-white border-gray-300 dark:border-gray-700 pl-7 pr-12 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+            placeholder="Search"
+          />
                     </div>
                     {/* /End replace */}
                   </div>
