@@ -63,7 +63,7 @@ const products = [
 ]
 
 export default function Home() {
-  const getAllShoe = api.shoe.getAllShoe.useQuery();
+  const getAllShoeNewly = api.shoe.getAllShoeNewly.useQuery();
   const getAllShoeTrending = api.shoe.getAllShoeTrending.useQuery();
 
   return (
@@ -100,7 +100,7 @@ export default function Home() {
                 role="list"
                 className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8"
               >
-                {getAllShoe.isFetching ? (<>
+                {getAllShoeTrending.isFetching ? (<>
                   <li className="w-64 inline-flex flex-col text-center lg:w-auto">
                     <div className="group relative">
                       <div className="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
@@ -213,7 +213,7 @@ export default function Home() {
                 role="list"
                 className="mx-4 inline-flex space-x-8 sm:mx-6 lg:mx-0 lg:space-x-0 lg:grid lg:grid-cols-4 lg:gap-x-8"
               >
-                {getAllShoe.isFetching ? (<>
+                {getAllShoeNewly.isFetching ? (<>
                   <li className="w-64 inline-flex flex-col text-center lg:w-auto">
                     <div className="group relative">
                       <div className="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
@@ -282,7 +282,7 @@ export default function Home() {
                       </div>
                     </div>
                   </li>
-                </>) : (<>{getAllShoe?.data?.map((product) => (
+                </>) : (<>{getAllShoeNewly?.data?.map((product) => (
                   <li key={product.id} className="w-64 inline-flex flex-col text-center lg:w-auto">
                     <div className="group relative">
                       <div className="w-full bg-gray-200 rounded-md overflow-hidden aspect-w-1 aspect-h-1">
