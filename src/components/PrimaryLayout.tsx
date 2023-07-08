@@ -216,13 +216,22 @@ export default function PrimaryLayout(props: {
 
 
 
-
-      <Dialog as="div" open={dash} className="relative z-10" onClose={setDash}>
+                <Transition.Root show={dash} as={Fragment}>
+      <Dialog as="div" className="relative z-10" id="scrollable" onClose={setDash}>
       <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
+              <Transition.Child
+                as={Fragment}
+                enter="transform transition ease-in-out duration-500 sm:duration-700"
+                enterFrom="translate-x-full"
+                enterTo="translate-x-0"
+                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                leaveFrom="translate-x-0"
+                leaveTo="translate-x-full"
+              >
                 <Dialog.Panel className="pointer-events-auto w-screen max-w-lg">
                   <form className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
                     <div className="h-0 flex-1 overflow-y-auto">
@@ -384,10 +393,12 @@ export default function PrimaryLayout(props: {
                     </div>
                   </form>
                 </Dialog.Panel>
+              </Transition.Child>
             </div>
           </div>
         </div>
       </Dialog>
+    </Transition.Root>
                 <main>
                     <div className="max-w-7xl mx-auto">
                         {props.children}
