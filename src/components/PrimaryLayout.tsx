@@ -225,10 +225,10 @@ export default function PrimaryLayout(props: {
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
               <Transition.Child
                 as={Fragment}
-                enter="transform transition ease-in-out duration-500 sm:duration-700"
+                enter="transform transition ease-in-out duration-800"
                 enterFrom="translate-x-full"
                 enterTo="translate-x-0"
-                leave="transform transition ease-in-out duration-500 sm:duration-700"
+                leave="transform transition ease-in-out duration-800"
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
@@ -247,6 +247,9 @@ export default function PrimaryLayout(props: {
                                   type="text"
                                   name="project-name"
                                   id="project-name"
+                                  autoComplete="off"
+                                onChange={(e) => set_search(e.target.value)}
+                                value={search}
                                   className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                 />
                               </div>
@@ -265,6 +268,27 @@ export default function PrimaryLayout(props: {
                                 />
                               </div>
                             </div>
+                            {search_debounced?.length > 0 ? <ul role="list" className="flex-1 ml-1 divide-y divide-gray-200 overflow-y-auto">
+                                                {searchShoe.isFetching ? <img className="mx-auto mt-4 h-8 w-8" src="/spinner.svg" alt="" /> : searchShoe?.data?.map((shoe, index) => (
+                                                    <li key={index}>
+                                                        <div className="group relative flex items-center py-6 cursor-pointer px-5 border-b">
+                                                            <a onClick={() => redirectlink(shoe.uniqueName)} className="-m-1 cursor-pointer block flex-1 p-1">
+                                                                <div className="absolute inset-0 cursor-pointer" aria-hidden="true" />
+                                                                <div className="relative flex min-w-0 flex-1 items-center">
+                                                                    <span className="relative inline-block flex-shrink-0">
+                                                                        <img className="h-10 w-12 " src={shoe?.pictures[0]} alt="" />
+                                                                    </span>
+                                                                    <div className="ml-5 truncate">
+                                                                        {/*@ts-ignore*/}
+                                                                        <p className="truncate text-sm font-medium text-gray-900">{shoe?.model?.brand?.name.concat(" ", shoe?.name)}</p>
+                                                                        <p className="truncate text-sm text-gray-500">{shoe.color}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                ))}
+                                            </ul> : null}
                             <div>
                               <h3 className="text-sm font-medium text-gray-900">Team Members</h3>
                               <div className="mt-2">
