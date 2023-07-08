@@ -210,7 +210,7 @@ export default function PrimaryLayout(props: {
                 </Disclosure>
 
 
-      <Dialog open={dash} className="fixed inset-0 overflow-hidden" onClose={setDash}>
+      <Dialog open={dash} className="fixed inset-0 overflow-hidden z-50" onClose={setDash}>
         <div className="absolute inset-0 overflow-hidden">
           <Dialog.Overlay className="absolute inset-0" />
 
@@ -251,7 +251,7 @@ export default function PrimaryLayout(props: {
                                 type="text"
                                 name="project-name"
                                 id="project-name"
-                                className="block z-50 w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                               />
                             </div>
                           </div>
@@ -269,7 +269,7 @@ export default function PrimaryLayout(props: {
           </div>
         </div>
       </Dialog>
-                <main>
+                <main className="z-0">
                     <div className="max-w-7xl mx-auto">
                         {props.children}
                     </div>
