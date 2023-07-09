@@ -293,7 +293,6 @@ export default function PrimaryLayout(props: {
                     </Dialog>
                 </Transition.Root>
                 <main>
-                                                                            
                     <div className="max-w-7xl mx-auto">
                         {props.children}
                     </div>
