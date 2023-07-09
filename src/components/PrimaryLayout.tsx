@@ -209,7 +209,7 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="relative z-10" onClose={setDash}>
+                    <Dialog as="div" className="relative z-100" onClose={setDash}>
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
                         <div className="fixed inset-0 overflow-hidden">
