@@ -217,7 +217,7 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="relative z-10" id="scrollable" onClose={setDash}>
+                    <Dialog as="div" className="relative z-50" onClose={setDash}>
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
                         <div className="fixed inset-0 overflow-hidden">
@@ -232,8 +232,8 @@ export default function PrimaryLayout(props: {
                                         leaveFrom="translate-x-0"
                                         leaveTo="translate-x-full"
                                     >
-                                        <Dialog.Panel className="pointer-events-auto w-screen max-w-lg">
-                                            <form className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                                        <Dialog.Panel className="pointer-events-auto w-screen h-screen max-w-lg">
+                                            <form className="flex h-screen flex-col divide-y divide-gray-200 bg-white shadow-xl">
                                             <div className="flex flex-col flex-shrink-0 justify-start px-4 py-4">
 
                                                                     <div className="mt-1">
@@ -250,7 +250,7 @@ export default function PrimaryLayout(props: {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                <div className="h-0 flex-1 overflow-y-auto">
+                                                <div className="h-0 flex-1 overflow-y-scroll">
                                                     <div className="flex flex-1 flex-col justify-between">
                                                         <div className="divide-y divide-gray-200 px-4 sm:px-6">
                                                             <div className="space-y-6">
