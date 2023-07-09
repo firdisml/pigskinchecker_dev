@@ -209,7 +209,7 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="relative z-10" onClose={setDash}>
+                    <Dialog as="div" className="relative z-100" onClose={setDash}>
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
                         <div className="fixed inset-0 overflow-hidden">
@@ -242,7 +242,7 @@ export default function PrimaryLayout(props: {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                <div className="h-0 flex-1 overflow-y-scroll">
+                                                <div className="h-0 flex-1 overflow-y-auto">
                                                     <div className="flex flex-1 flex-col justify-between">
                                                         <div className="divide-y divide-gray-200 px-4 sm:px-6">
                                                             <div className="space-y-6">
