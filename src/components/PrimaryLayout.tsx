@@ -98,28 +98,18 @@ export default function PrimaryLayout(props: {
     ]
 
 
-
+    useEffect(() => {
+        if (dash){
+            document.body.style.position = 'fixed'
+            document.body.style.top = `-${window.scrollY}px`;
+        }else {
+            document.body.style.position = '';
+            document.body.style.top = '';
+        } 
+    },[dash])
     if (!mounted) return <></>;
-    function preventScroll(e: any) {
-        e.preventDefault();
-        e.stopPropagation();
 
-        return false;
-    }
-    //@ts-ignore
-    const numberInputOnWheelPreventChange = (e) => {
-        // Prevent the input value change
-        e.target.blur()
-
-        // Prevent the page/container scrolling
-        e.stopPropagation()
-
-
-        setTimeout(() => {
-            e.target.focus()
-        }, 0)
-    }
-
+   
     return (
         <>
             <div className="min-h-full">
@@ -217,10 +207,10 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="relative z-50" onClose={setDash}>
+                    <Dialog as="div" className="relative z-10" onClose={setDash}>
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
-                        <div className="fixed inset-0 overflow-y-hidden h-screen">
+                        <div className="fixed inset-0 overflow-hidden">
                             <div className="absolute inset-0 overflow-hidden">
                                 <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
                                     <Transition.Child
@@ -232,7 +222,7 @@ export default function PrimaryLayout(props: {
                                         leaveFrom="translate-x-0"
                                         leaveTo="translate-x-full"
                                     >
-                                        <Dialog.Panel className="pointer-events-auto w-screen max-w-lg">
+                                        <Dialog.Panel className="pointer-events-auto w-screen opacity-70 max-w-lg">
                                             <div className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
                                             <div className="flex flex-col flex-shrink-0 justify-start px-4 py-4">
 
