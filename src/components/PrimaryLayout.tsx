@@ -220,7 +220,7 @@ export default function PrimaryLayout(props: {
                     <Dialog as="div" className="relative z-50" onClose={setDash}>
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
-                        <div className="fixed inset-0 overflow-hidden">
+                        <div className="fixed inset-0 overflow-y-hidden h-screen">
                             <div className="absolute inset-0 overflow-hidden">
                                 <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full">
                                     <Transition.Child
@@ -232,8 +232,8 @@ export default function PrimaryLayout(props: {
                                         leaveFrom="translate-x-0"
                                         leaveTo="translate-x-full"
                                     >
-                                        <Dialog.Panel className="pointer-events-auto w-screen h-screen max-w-lg">
-                                            <form className="flex h-screen flex-col divide-y divide-gray-200 bg-white shadow-xl">
+                                        <Dialog.Panel className="pointer-events-auto w-screen max-w-lg">
+                                            <div className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
                                             <div className="flex flex-col flex-shrink-0 justify-start px-4 py-4">
 
                                                                     <div className="mt-1">
@@ -303,7 +303,7 @@ export default function PrimaryLayout(props: {
                                                     </button>
                                                     
                                                 </div>
-                                            </form>
+                                            </div>
                                         </Dialog.Panel>
                                     </Transition.Child>
                                 </div>
