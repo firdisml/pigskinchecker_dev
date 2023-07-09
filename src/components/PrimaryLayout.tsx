@@ -242,7 +242,7 @@ export default function PrimaryLayout(props: {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                <div className="h-0 flex-1 overflow-y-scroll">
+                                                <div className="h-0 flex-1 overflow-y-auto">
                                                     <div className="flex flex-1 flex-col justify-between">
                                                         <div className="divide-y divide-gray-200 px-4 sm:px-6">
                                                             <div className="space-y-6">
