@@ -100,8 +100,8 @@ export default function PrimaryLayout(props: {
 
     useEffect(() => {
         if (dash){
-            document.querySelector("body")?.classList.add("fixed")
-
+            document.body.style.position = 'fixed'
+            document.body.style.top = `-${window.scrollY}px`;
         }else {
             const scrollY = document.body.style.top;
             document.body.style.position = '';
@@ -111,6 +111,7 @@ export default function PrimaryLayout(props: {
     },[dash])
 
     if (!mounted) return <></>;
+
     return (
         <>
             <div className="min-h-full">
