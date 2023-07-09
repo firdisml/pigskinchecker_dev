@@ -98,33 +98,6 @@ export default function PrimaryLayout(props: {
     ]
 
 
-    useEffect(() => {
-        const handleScroll = () => {
-          if (dash) {
-            const scrollY = window.scrollY;
-            document.body.style.overflow = 'hidden';
-            window.scrollTo(0, 0);
-            document.body.style.position = 'fixed';
-            document.body.style.top = `-${scrollY}px`;
-          } else {
-            const scrollY = parseInt(document.body.style.top || '0') * -1;
-            document.body.style.overflow = '';
-            document.body.style.position = '';
-            document.body.style.top = '';
-            window.scrollTo(0, scrollY);
-          }
-        };
-      
-        handleScroll();
-      
-        return () => {
-          // Clean up the scroll behavior when the component is unmounted
-          document.body.style.overflow = '';
-          document.body.style.position = '';
-          document.body.style.top = '';
-          window.scrollTo(0, 0);
-        };
-      }, [dash]);
 
     if (!mounted) return <></>;
 
@@ -225,7 +198,7 @@ export default function PrimaryLayout(props: {
 
 
                 <Transition.Root show={dash} as={Fragment}>
-                    <Dialog as="div" className="relative z-100" onClose={setDash}>
+                    <Dialog as="div" className="relative z-10" onClose={setDash}>
                         <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
 
                         <div className="fixed inset-0 overflow-hidden">
