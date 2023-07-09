@@ -99,16 +99,32 @@ export default function PrimaryLayout(props: {
 
 
     useEffect(() => {
-        if (dash){
-            document.body.style.position = 'fixed'
-            document.body.style.top = `-${window.scrollY}px`;
-        }else {
-            const scrollY = document.body.style.top;
+        const handleScroll = () => {
+          if (dash) {
+            const scrollY = window.scrollY;
+            document.body.style.overflow = 'hidden';
+            window.scrollTo(0, 0);
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+          } else {
+            const scrollY = parseInt(document.body.style.top || '0') * -1;
+            document.body.style.overflow = '';
             document.body.style.position = '';
             document.body.style.top = '';
-            window.scrollTo(0, parseInt(scrollY || '0') * -1);
-        } 
-    },[dash])
+            window.scrollTo(0, scrollY);
+          }
+        };
+      
+        handleScroll();
+      
+        return () => {
+          // Clean up the scroll behavior when the component is unmounted
+          document.body.style.overflow = '';
+          document.body.style.position = '';
+          document.body.style.top = '';
+          window.scrollTo(0, 0);
+        };
+      }, [dash]);
 
     if (!mounted) return <></>;
 
