@@ -214,7 +214,7 @@ export default function PrimaryLayout(props: {
                                         leaveFrom="translate-x-0"
                                         leaveTo="translate-x-full"
                                     >
-                                        <Dialog.Panel className="pointer-events-auto w-screen opacity-70 max-w-lg">
+                                        <Dialog.Panel className="pointer-events-auto w-screen opacity-70 max-w-lg overflow-hidden">
                                             <div className="flex h-full flex-col divide-y divide-gray-200 bg-white shadow-xl">
                                             <div className="flex flex-col flex-shrink-0 justify-start px-4 py-4">
 
@@ -232,7 +232,7 @@ export default function PrimaryLayout(props: {
                                                                         />
                                                                     </div>
                                                                 </div>
-                                                <div className="h-0 flex-1 overflow-y-auto">
+                                                <div className="h-0 flex-1 overflow-y-scroll">
                                                     <div className="flex flex-1 flex-col justify-between">
                                                         <div className="divide-y divide-gray-200 px-4 sm:px-6">
                                                             <div className="space-y-6">
