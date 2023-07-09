@@ -153,6 +153,7 @@ export default function PrimaryLayout(props: {
                                             <HiSearch className="h-6 w-6 mr-5" aria-hidden="true" />
                                         </button>
 
+
                                         <Disclosure.Button
                                             className="bg-transparent inline-flex items-center justify-center p-2 text-gray-700 dark:text-white">
                                             {open ? (
